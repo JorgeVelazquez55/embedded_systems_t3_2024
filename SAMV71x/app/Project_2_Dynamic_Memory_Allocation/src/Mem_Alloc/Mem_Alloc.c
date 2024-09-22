@@ -2,7 +2,7 @@
 /**
   \mainpage
   \n 
-  \brief        Main application (main module)
+  \brief        Memory Allocation Handler
   \author       Gustavo S, Roberto V, Jorge V
   \project      Dynamic Memory Allocation Handler 
   \version      1.0
@@ -21,9 +21,15 @@
 #include    "Mem_Alloc.h"
 
 /*~~~~~~  Local definitions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/       
+MemHandlerType MemControl =
+{
+  .MemStart =   (uint8_t *) &_heap_mem_start,                               /* Sets the start of the heap memory */
+  .MemEnd =     (uint8_t *) &_heap_mem_end,                                 /* Sets the end of the heap memory */
+  .CurrAddr =   (uint8_t *) &_heap_mem_start,                               /* Initialize the current start address */
+  .FreeBytes =  (uint8_t *) &_heap_mem_end - (uint8_t *) &_heap_mem_start;  /* Sets the size of the heap memory */
+};
 
 /*~~~~~~  Global variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
 
 /*~~~~~~  Local functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
@@ -38,12 +44,23 @@
 
 
 
-extern int main( void )
+
+
+MemReturnType Mem_Alloc( MemSizeType Size )
 {
-  /* Disable watchdog */
-  WDT_Disable(WDT);
-  /* Enable I and D cache */
-  SCB_EnableICache();
-	/* Memory Allocation Handler */
-	Mem_Alloc();	
+  MemReturnType NewStartAddr;
+  uint32_t      CurrStartAddr;
+
+  if ( Size > MemControl.FreeBytes )
+  {
+    printf('Error: Size exceeds available HEAP memory - Unable to perform requested memory allocation');
+    NewStartAddr = NULL;  
+  }
+  else
+  {
+    CurrStartAddr = MemControl.CurrAddr + Size;
+    NewStartAddr = MemControl.CurrAddr;
+  }
+
+  return NewStartAddr;
 }
