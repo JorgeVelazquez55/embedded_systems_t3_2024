@@ -30,7 +30,7 @@ cpu_irq_prev_interrupt_state:
 	.type	TASKS_LIST_1MS, %function
 TASKS_LIST_1MS:
 .LFB127:
-	.file 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_tasks.c"
+	.file 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_tasks.c"
 	.loc 1 37 0
 	.cfi_startproc
 	@ args = 0, pretend = 0, frame = 0
@@ -1551,7 +1551,7 @@ TASKS_LIST_100MS:
 	.byte	0x5
 	.uleb128 0x2
 	.4byte	.LASF358
-	.file 6 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_tasks.h"
+	.file 6 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_tasks.h"
 	.byte	0x3
 	.uleb128 0x10
 	.uleb128 0x6
@@ -2467,7 +2467,7 @@ TASKS_LIST_100MS:
 	.byte	0x7
 	.4byte	.Ldebug_macro119
 	.byte	0x4
-	.file 123 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\ECU Abstraction\\LED control/led_ctrl.h"
+	.file 123 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\ECU Abstraction\\LED control/led_ctrl.h"
 	.byte	0x3
 	.uleb128 0x10
 	.uleb128 0x7b
@@ -60412,9 +60412,6 @@ TASKS_LIST_100MS:
 	.ascii	"XDMAC_GRWS_RWS15 (0x1u << 15)\000"
 .LASF11137:
 	.ascii	"REG_XDMAC_CC17 (*(__IO uint32_t*)0x400784B8U)\000"
-.LASF12892:
-	.ascii	"C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\"
-	.ascii	"src\\Services\\Scheduler\\app_tasks.c\000"
 .LASF11639:
 	.ascii	"REG_PIOE_IFDR (*(__O uint32_t*)0x400E1624U)\000"
 .LASF2021:
@@ -61392,6 +61389,9 @@ TASKS_LIST_100MS:
 	.ascii	"HSMCI_CR_MCIDIS (0x1u << 1)\000"
 .LASF9907:
 	.ascii	"REG_TC2_CV2 (*(__I uint32_t*)0x40014090U)\000"
+.LASF12892:
+	.ascii	"C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_"
+	.ascii	"Allocation\\src\\Services\\Scheduler\\app_tasks.c\000"
 .LASF4074:
 	.ascii	"PIO_IFDR_P11 (0x1u << 11)\000"
 .LASF4053:

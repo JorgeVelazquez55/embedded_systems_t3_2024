@@ -12,20 +12,33 @@
 */
 /****************************************************************************************************/
 
+#ifndef MEM_ALLOC_TYPES_H
+#define MEM_ALLOC_TYPES_H
 
-/*~~~~~~  Headers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#include "stdint.h"
 
+/**
+ * @brief 
+ * 
+ */
+typedef void* MemReturnType;
 
-/*~~~~~~  Data Types ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-typedef	void*     MemReturnType;
+/**
+ * @brief 
+ * 
+ */
+typedef uint16_t MemSizeType;
 
-typedef	uint16_t  MemSizeType;
-
-typedef	struct
+/**
+ * @brief 
+ * 
+ */
+typedef struct
 {
-  uint8_t*  MemStart;
-	uint8_t*  MemEnd;
-	uint8_t*  CurrAddr;
-	uint32_t  FreeBytes;
+    uint8_t* MemStart;
+    uint8_t* MemEnd;
+    uint8_t* CurrAddr;
+    uint32_t FreeBytes;
 }MemHandlerType;
 
+#endif

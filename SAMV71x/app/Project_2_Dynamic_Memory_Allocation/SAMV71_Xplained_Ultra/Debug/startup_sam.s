@@ -110,7 +110,7 @@ exception_table:
 TCM_Disable:
 .LFB124:
 	.file 1 "C:\\SAMV7x\\SAMV71x\\toolset\\gcc\\startup_sam.c"
-	.loc 1 320 0
+	.loc 1 322 0
 	.cfi_startproc
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 1, uses_anonymous_args = 0
@@ -139,13 +139,13 @@ TCM_Disable:
 	.thumb
 .LBE13:
 .LBE12:
-	.loc 1 324 0
+	.loc 1 326 0
 	ldr	r2, .L2
 	ldr	r3, .L2
 	ldr	r3, [r3, #656]
 	bic	r3, r3, #1
 	str	r3, [r2, #656]
-	.loc 1 325 0
+	.loc 1 327 0
 	ldr	r2, .L2
 	ldr	r3, .L2
 	ldr	r3, [r3, #660]
@@ -169,7 +169,7 @@ TCM_Disable:
 	.thumb
 .LBE17:
 .LBE16:
-	.loc 1 328 0
+	.loc 1 330 0
 	mov	sp, r7
 	.cfi_def_cfa_register 13
 	@ sp needed
@@ -191,7 +191,7 @@ TCM_Disable:
 	.type	Reset_Handler, %function
 Reset_Handler:
 .LFB125:
-	.loc 1 335 0
+	.loc 1 337 0
 	.cfi_startproc
 	@ args = 0, pretend = 0, frame = 8
 	@ frame_needed = 1, uses_anonymous_args = 0
@@ -203,21 +203,21 @@ Reset_Handler:
 	.cfi_def_cfa_offset 16
 	add	r7, sp, #0
 	.cfi_def_cfa_register 7
-	.loc 1 339 0
+	.loc 1 341 0
 	ldr	r3, .L11
 	str	r3, [r7, #4]
-	.loc 1 340 0
+	.loc 1 342 0
 	ldr	r3, .L11+4
 	str	r3, [r7]
-	.loc 1 342 0
+	.loc 1 344 0
 	ldr	r2, [r7, #4]
 	ldr	r3, [r7]
 	cmp	r2, r3
 	beq	.L5
-	.loc 1 343 0
+	.loc 1 345 0
 	b	.L6
 .L7:
-	.loc 1 344 0
+	.loc 1 346 0
 	ldr	r3, [r7]
 	adds	r2, r3, #4
 	str	r2, [r7]
@@ -227,53 +227,53 @@ Reset_Handler:
 	ldr	r2, [r2]
 	str	r2, [r3]
 .L6:
-	.loc 1 343 0
+	.loc 1 345 0
 	ldr	r3, [r7]
 	ldr	r2, .L11+8
 	cmp	r3, r2
 	bcc	.L7
 .L5:
-	.loc 1 349 0
+	.loc 1 351 0
 	ldr	r3, .L11+12
 	str	r3, [r7]
 	b	.L8
 .L9:
-	.loc 1 350 0
+	.loc 1 352 0
 	ldr	r3, [r7]
 	adds	r2, r3, #4
 	str	r2, [r7]
 	movs	r2, #0
 	str	r2, [r3]
 .L8:
-	.loc 1 349 0 discriminator 1
+	.loc 1 351 0 discriminator 1
 	ldr	r3, [r7]
 	ldr	r2, .L11+16
 	cmp	r3, r2
 	bcc	.L9
-	.loc 1 354 0
+	.loc 1 356 0
 	ldr	r3, .L11+20
 	str	r3, [r7, #4]
-	.loc 1 355 0
+	.loc 1 357 0
 	ldr	r2, .L11+24
 	ldr	r3, [r7, #4]
 	bic	r3, r3, #127
 	str	r3, [r2, #8]
-	.loc 1 372 0
+	.loc 1 374 0
 	ldr	r3, .L11+28
 	ldr	r2, .L11+32
 	str	r2, [r3, #4]
-	.loc 1 374 0
+	.loc 1 376 0
 	ldr	r3, .L11+28
 	ldr	r2, .L11+36
 	str	r2, [r3, #4]
-	.loc 1 377 0
+	.loc 1 379 0
 	bl	TCM_Disable
-	.loc 1 380 0
+	.loc 1 382 0
 	bl	LowLevelInit
-	.loc 1 385 0
+	.loc 1 387 0
 	bl	main
 .L10:
-	.loc 1 388 0 discriminator 1
+	.loc 1 390 0 discriminator 1
 	b	.L10
 .L12:
 	.align	2
@@ -298,7 +298,7 @@ Reset_Handler:
 	.type	Dummy_Handler, %function
 Dummy_Handler:
 .LFB126:
-	.loc 1 395 0
+	.loc 1 397 0
 	.cfi_startproc
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 1, uses_anonymous_args = 0
@@ -309,7 +309,7 @@ Dummy_Handler:
 	add	r7, sp, #0
 	.cfi_def_cfa_register 7
 .L14:
-	.loc 1 397 0 discriminator 1
+	.loc 1 399 0 discriminator 1
 	b	.L14
 	.cfi_endproc
 .LFE126:
@@ -1522,7 +1522,7 @@ Dummy_Handler:
 	.uleb128 0x15
 	.4byte	.LASF12690
 	.byte	0x1
-	.2byte	0x13f
+	.2byte	0x141
 	.4byte	.LFB124
 	.4byte	.LFE124-.LFB124
 	.uleb128 0x1
@@ -1533,30 +1533,30 @@ Dummy_Handler:
 	.4byte	.LBB10
 	.4byte	.LBE10-.LBB10
 	.byte	0x1
-	.2byte	0x142
+	.2byte	0x144
 	.uleb128 0x16
 	.4byte	0x8a6
 	.4byte	.LBB12
 	.4byte	.LBE12-.LBB12
 	.byte	0x1
-	.2byte	0x143
+	.2byte	0x145
 	.uleb128 0x16
 	.4byte	0x89d
 	.4byte	.LBB14
 	.4byte	.LBE14-.LBB14
 	.byte	0x1
-	.2byte	0x146
+	.2byte	0x148
 	.uleb128 0x16
 	.4byte	0x8a6
 	.4byte	.LBB16
 	.4byte	.LBE16-.LBB16
 	.byte	0x1
-	.2byte	0x147
+	.2byte	0x149
 	.byte	0
 	.uleb128 0x17
 	.4byte	.LASF12691
 	.byte	0x1
-	.2byte	0x14e
+	.2byte	0x150
 	.4byte	.LFB125
 	.4byte	.LFE125-.LFB125
 	.uleb128 0x1
@@ -1565,7 +1565,7 @@ Dummy_Handler:
 	.uleb128 0x18
 	.4byte	.LASF12676
 	.byte	0x1
-	.2byte	0x150
+	.2byte	0x152
 	.4byte	0x93b
 	.uleb128 0x2
 	.byte	0x91
@@ -1573,7 +1573,7 @@ Dummy_Handler:
 	.uleb128 0x18
 	.4byte	.LASF12677
 	.byte	0x1
-	.2byte	0x150
+	.2byte	0x152
 	.4byte	0x93b
 	.uleb128 0x2
 	.byte	0x91
@@ -1585,7 +1585,7 @@ Dummy_Handler:
 	.uleb128 0x1a
 	.4byte	.LASF12692
 	.byte	0x1
-	.2byte	0x18a
+	.2byte	0x18c
 	.4byte	.LFB126
 	.4byte	.LFE126-.LFB126
 	.uleb128 0x1
@@ -1635,7 +1635,7 @@ Dummy_Handler:
 	.uleb128 0x1d
 	.4byte	.LASF12686
 	.byte	0x1
-	.byte	0x9f
+	.byte	0xa1
 	.4byte	0x9c2
 	.uleb128 0x5
 	.byte	0x3

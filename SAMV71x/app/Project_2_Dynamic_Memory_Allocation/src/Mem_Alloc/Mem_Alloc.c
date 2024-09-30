@@ -16,23 +16,32 @@
 /*~~~~~~  Headers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 /** Main group of includes for board definitions, chip definitions and type definitions */
-#include    "board.h"
-/** User component module interfaces */
-#include    "Mem_Alloc.h"
+#include "Mem_Alloc.h"
+#include "stdlib.h"
+
 
 /*~~~~~~  Local definitions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/       
-MemHandlerType MemControl =
-{
-  .MemStart =   (uint8_t *) &_heap_mem_start,                               /* Sets the start of the heap memory */
-  .MemEnd =     (uint8_t *) &_heap_mem_end,                                 /* Sets the end of the heap memory */
-  .CurrAddr =   (uint8_t *) &_heap_mem_start,                               /* Initialize the current start address */
-  .FreeBytes =  (uint8_t *) &_heap_mem_end - (uint8_t *) &_heap_mem_start;  /* Sets the size of the heap memory */
-};
+MemHandlerType MemControl = {(uint8_t *) &_heap_mem_start, (uint8_t *) &_heap_mem_end, (uint8_t *) &_heap_mem_start, 10000};
 
 /*~~~~~~  Global variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 /*~~~~~~  Local functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+MemReturnType Mem_Alloc ( MemSizeType Size )
+{   
+    uint8_t* alignedAddress = NULL;
+    if( MemControl.CurrAddr+Size > MemControl.MemEnd || Size > MemControl.FreeBytes )
+    {
+        // Not enough memory space
+        return NULL;
+    }
+    else{
+        MemControl.MemStart = MemControl.CurrAddr;
+        MemControl.CurrAddr = (uint8_t*)((uint32_t)MemControl.CurrAddr + (uint32_t)((Size + 3) & 0xFFFFFFFC));
+        MemControl.FreeBytes = MemControl.FreeBytes - Size;
+        return MemControl.MemStart;
+    }
 
+}
 /*----------------------------------------------------------------------------
  *        Exported functions
  *----------------------------------------------------------------------------*/
@@ -42,25 +51,3 @@ MemHandlerType MemControl =
  *  \return Unused (ANSI-C compatibility).
  */
 
-
-
-
-
-MemReturnType Mem_Alloc( MemSizeType Size )
-{
-  MemReturnType NewStartAddr;
-  uint32_t      CurrStartAddr;
-
-  if ( Size > MemControl.FreeBytes )
-  {
-    printf('Error: Size exceeds available HEAP memory - Unable to perform requested memory allocation');
-    NewStartAddr = NULL;  
-  }
-  else
-  {
-    CurrStartAddr = MemControl.CurrAddr + Size;
-    NewStartAddr = MemControl.CurrAddr;
-  }
-
-  return NewStartAddr;
-}

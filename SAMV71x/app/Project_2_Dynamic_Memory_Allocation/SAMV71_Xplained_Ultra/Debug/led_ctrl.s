@@ -30,7 +30,7 @@ cpu_irq_prev_interrupt_state:
 	.type	vfnLedCtrl_Configure, %function
 vfnLedCtrl_Configure:
 .LFB127:
-	.file 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\ECU Abstraction\\LED control\\led_ctrl.c"
+	.file 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\ECU Abstraction\\LED control\\led_ctrl.c"
 	.loc 1 53 0
 	.cfi_startproc
 	@ args = 0, pretend = 0, frame = 0
@@ -1565,7 +1565,7 @@ gu8Index.6879:
 	.byte	0x5
 	.uleb128 0x2
 	.4byte	.LASF358
-	.file 6 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\ECU Abstraction\\LED control\\led_ctrl.h"
+	.file 6 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\ECU Abstraction\\LED control\\led_ctrl.h"
 	.byte	0x3
 	.uleb128 0x10
 	.uleb128 0x6
@@ -44758,6 +44758,10 @@ gu8Index.6879:
 	.ascii	"USBHS_DEVIMR_PEP_8 (0x1u << 20)\000"
 .LASF5762:
 	.ascii	"PMC_PCDR1_PID43 (0x1u << 11)\000"
+.LASF12889:
+	.ascii	"C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_"
+	.ascii	"Allocation\\src\\ECU Abstraction\\LED control\\led_"
+	.ascii	"ctrl.c\000"
 .LASF6686:
 	.ascii	"RSTC_CR_KEY(value) ((RSTC_CR_KEY_Msk & ((value) << "
 	.ascii	"RSTC_CR_KEY_Pos)))\000"
@@ -51685,9 +51689,6 @@ gu8Index.6879:
 	.ascii	"AFEC_EMR_RES_OSR16 (0x3u << 16)\000"
 .LASF337:
 	.ascii	"__ARM_ARCH_PROFILE 77\000"
-.LASF12889:
-	.ascii	"C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\"
-	.ascii	"src\\ECU Abstraction\\LED control\\led_ctrl.c\000"
 .LASF10888:
 	.ascii	"REG_XDMAC_GSWF (*(__O uint32_t*)0x40078040U)\000"
 .LASF2545:
@@ -58577,6 +58578,8 @@ gu8Index.6879:
 	.ascii	"ICM_IER_RBE_Msk (0xfu << ICM_IER_RBE_Pos)\000"
 .LASF11403:
 	.ascii	"REG_PIOA_ABCDSR (*(__IO uint32_t*)0x400E0E70U)\000"
+.LASF1665:
+	.ascii	"CHIPID_CIDR_ARCH_SAMS70 (0x11u << 20)\000"
 .LASF84:
 	.ascii	"__INT8_MAX__ 127\000"
 .LASF1625:
@@ -61301,8 +61304,6 @@ gu8Index.6879:
 .LASF7011:
 	.ascii	"SMC_PULSE_NWE_PULSE_Msk (0x7fu << SMC_PULSE_NWE_PUL"
 	.ascii	"SE_Pos)\000"
-.LASF5056:
-	.ascii	"PIO_LSR_P30 (0x1u << 30)\000"
 .LASF5413:
 	.ascii	"PIO_PCMR_DSIZE_HALFWORD (0x1u << 4)\000"
 .LASF12825:
@@ -63067,8 +63068,8 @@ gu8Index.6879:
 	.ascii	"XDMAC_GIS_IS4 (0x1u << 4)\000"
 .LASF3065:
 	.ascii	"MCAN_TEST_TX_SAMPLE_POINT_MONITORING (0x1u << 5)\000"
-.LASF1665:
-	.ascii	"CHIPID_CIDR_ARCH_SAMS70 (0x11u << 20)\000"
+.LASF5056:
+	.ascii	"PIO_LSR_P30 (0x1u << 30)\000"
 .LASF11538:
 	.ascii	"REG_PIOC_OWDR (*(__O uint32_t*)0x400E12A4U)\000"
 .LASF6482:

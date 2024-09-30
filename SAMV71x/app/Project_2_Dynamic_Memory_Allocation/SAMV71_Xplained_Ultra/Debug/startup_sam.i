@@ -17288,6 +17288,8 @@ extern uint32_t _szero;
 extern uint32_t _ezero;
 extern uint32_t _sstack;
 extern uint32_t _estack;
+extern uint32_t _heap_mem_start;
+extern uint32_t _heap_mem_end;
 
 
 int main(void);
@@ -17539,7 +17541,7 @@ const DeviceVectors exception_table = {
 
   .pfnRSWDT_Handler = (void*) RSWDT_Handler
 };
-# 319 "C:\\SAMV7x\\SAMV71x\\toolset\\gcc\\startup_sam.c"
+# 321 "C:\\SAMV7x\\SAMV71x\\toolset\\gcc\\startup_sam.c"
 static inline void TCM_Disable(void)
 {
 
@@ -17577,7 +17579,7 @@ void Reset_Handler(void)
 
   pSrc = (uint32_t *) & _sfixed;
   ((SCB_Type *) ((0xE000E000UL) + 0x0D00UL) )->VTOR = ((uint32_t) pSrc & (0x1FFFFFFUL << 7));
-# 372 "C:\\SAMV7x\\SAMV71x\\toolset\\gcc\\startup_sam.c"
+# 374 "C:\\SAMV7x\\SAMV71x\\toolset\\gcc\\startup_sam.c"
   ((Efc *)0x400E0C00U)->EEFC_FCR = ((0x5Au << 24) | (0xCu << 0)
       | (((0xffffu << 8) & ((8) << 8))));
   ((Efc *)0x400E0C00U)->EEFC_FCR = ((0x5Au << 24) | (0xCu << 0)

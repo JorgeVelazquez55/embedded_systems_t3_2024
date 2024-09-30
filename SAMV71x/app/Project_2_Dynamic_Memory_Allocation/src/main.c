@@ -18,6 +18,9 @@
 /** Main group of includes for board definitions, chip definitions and type definitions */
 #include    "board.h"
 /** User component module interfaces */
+/** LED control definitions */ 
+#include    "led_ctrl.h"
+//#include "MemAlloc/Mem_Alloc.h"
 #include    "Mem_Alloc.h"
 
 /*~~~~~~  Local definitions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/       
@@ -36,14 +39,27 @@
  *  \return Unused (ANSI-C compatibility).
  */
 
-
-
 extern int main( void )
 {
-  /* Disable watchdog */
-  WDT_Disable(WDT);
-  /* Enable I and D cache */
-  SCB_EnableICache();
-	/* Memory Allocation Handler */
-	Mem_Alloc();	
+	//_ConfigureButtons();
+	LED_Configure( 0 ) ;
+	/* Disable watchdog */
+	WDT_Disable(WDT);
+	/* Enable I and D cache */
+	SCB_EnableICache();
+	/* SCB_EnableDCache(); */
+	/* Configure LEDs */
+	
+	Mem_Alloc(8);
+  
+  Mem_Alloc(15);
+  
+  Mem_Alloc(200);
+  
+  Mem_Alloc(40);
+  
+  Mem_Alloc(10000);
+  
+	printf("Hola Mundo\n");
+
 }

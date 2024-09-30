@@ -27,23 +27,22 @@
 /* EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                           */
 /* ---------------------------------------------------------------------------- */
 
-INPUT (C:\SAMV7x\SAMV71x\app\Project_1_Task_Scheduler\SAMV71_Xplained_Ultra\Debug\main.o 
-C:\SAMV7x\SAMV71x\app\Project_1_Task_Scheduler\SAMV71_Xplained_Ultra\Debug\system_sam.o 
-C:\SAMV7x\SAMV71x\app\Project_1_Task_Scheduler\SAMV71_Xplained_Ultra\Debug\syscalls.o 
-C:\SAMV7x\SAMV71x\app\Project_1_Task_Scheduler\SAMV71_Xplained_Ultra\Debug\app_scheduler.o 
-C:\SAMV7x\SAMV71x\app\Project_1_Task_Scheduler\SAMV71_Xplained_Ultra\Debug\app_tasks.o 
-C:\SAMV7x\SAMV71x\app\Project_1_Task_Scheduler\SAMV71_Xplained_Ultra\Debug\startup_sam.o 
-C:\SAMV7x\SAMV71x\app\Project_1_Task_Scheduler\SAMV71_Xplained_Ultra\Debug\board_lowlevel.o 
-C:\SAMV7x\SAMV71x\app\Project_1_Task_Scheduler\SAMV71_Xplained_Ultra\Debug\dbg_console.o 
-C:\SAMV7x\SAMV71x\app\Project_1_Task_Scheduler\SAMV71_Xplained_Ultra\Debug\led.o 
-C:\SAMV7x\SAMV71x\app\Project_1_Task_Scheduler\SAMV71_Xplained_Ultra\Debug\pmc.o 
-C:\SAMV7x\SAMV71x\app\Project_1_Task_Scheduler\SAMV71_Xplained_Ultra\Debug\pio.o 
-C:\SAMV7x\SAMV71x\app\Project_1_Task_Scheduler\SAMV71_Xplained_Ultra\Debug\mpu.o 
-C:\SAMV7x\SAMV71x\app\Project_1_Task_Scheduler\SAMV71_Xplained_Ultra\Debug\exceptions.o 
-C:\SAMV7x\SAMV71x\app\Project_1_Task_Scheduler\SAMV71_Xplained_Ultra\Debug\systick.o 
-C:\SAMV7x\SAMV71x\app\Project_1_Task_Scheduler\SAMV71_Xplained_Ultra\Debug\pio_it.o 
-C:\SAMV7x\SAMV71x\app\Project_1_Task_Scheduler\SAMV71_Xplained_Ultra\Debug\wdt.o 
-C:\SAMV7x\SAMV71x\app\Project_1_Task_Scheduler\SAMV71_Xplained_Ultra\Debug\led_ctrl.o)
+INPUT (C:\SAMV7x\SAMV71x\app\Project_2_Dynamic_Memory_Allocation\SAMV71_Xplained_Ultra\Debug\main.o 
+C:\SAMV7x\SAMV71x\app\Project_2_Dynamic_Memory_Allocation\SAMV71_Xplained_Ultra\Debug\system_sam.o 
+C:\SAMV7x\SAMV71x\app\Project_2_Dynamic_Memory_Allocation\SAMV71_Xplained_Ultra\Debug\syscalls.o 
+C:\SAMV7x\SAMV71x\app\Project_2_Dynamic_Memory_Allocation\SAMV71_Xplained_Ultra\Debug\Mem_Alloc.o 
+C:\SAMV7x\SAMV71x\app\Project_2_Dynamic_Memory_Allocation\SAMV71_Xplained_Ultra\Debug\startup_sam.o 
+C:\SAMV7x\SAMV71x\app\Project_2_Dynamic_Memory_Allocation\SAMV71_Xplained_Ultra\Debug\board_lowlevel.o 
+C:\SAMV7x\SAMV71x\app\Project_2_Dynamic_Memory_Allocation\SAMV71_Xplained_Ultra\Debug\dbg_console.o 
+C:\SAMV7x\SAMV71x\app\Project_2_Dynamic_Memory_Allocation\SAMV71_Xplained_Ultra\Debug\led.o 
+C:\SAMV7x\SAMV71x\app\Project_2_Dynamic_Memory_Allocation\SAMV71_Xplained_Ultra\Debug\pmc.o 
+C:\SAMV7x\SAMV71x\app\Project_2_Dynamic_Memory_Allocation\SAMV71_Xplained_Ultra\Debug\pio.o 
+C:\SAMV7x\SAMV71x\app\Project_2_Dynamic_Memory_Allocation\SAMV71_Xplained_Ultra\Debug\mpu.o 
+C:\SAMV7x\SAMV71x\app\Project_2_Dynamic_Memory_Allocation\SAMV71_Xplained_Ultra\Debug\exceptions.o 
+C:\SAMV7x\SAMV71x\app\Project_2_Dynamic_Memory_Allocation\SAMV71_Xplained_Ultra\Debug\systick.o 
+C:\SAMV7x\SAMV71x\app\Project_2_Dynamic_Memory_Allocation\SAMV71_Xplained_Ultra\Debug\pio_it.o 
+C:\SAMV7x\SAMV71x\app\Project_2_Dynamic_Memory_Allocation\SAMV71_Xplained_Ultra\Debug\wdt.o 
+C:\SAMV7x\SAMV71x\app\Project_2_Dynamic_Memory_Allocation\SAMV71_Xplained_Ultra\Debug\led_ctrl.o)
 
 /*------------------------------------------------------------------------------
  *      Linker script for running in internal FLASH on the ATSAMV71Q21
@@ -56,9 +55,10 @@ SEARCH_DIR(.)
 /* Memory Spaces Definitions */
 MEMORY
 {
-  rom (rx)  : ORIGIN = 0x00400000, LENGTH = 0x00200000
-  ram (rwx) : ORIGIN = 0x20400000, LENGTH = 0x00060000
-  sdram(rwx): ORIGIN = 0x70000000, LENGTH = 0x00200000
+  rom (rx)            : ORIGIN = 0x00400000, LENGTH = 0x00200000
+  heap_memalloc(rwx)  : ORIGIN = 0x20400000, LENGTH = 0x00010000
+  ram (rwx)           : ORIGIN = 0x20410000, LENGTH = 0x00060000
+  sdram(rwx)          : ORIGIN = 0x70000000, LENGTH = 0x00200000
 }
 
 /* The stack size used by the application. NOTE: you need to adjust according to your application. */
@@ -66,6 +66,8 @@ STACK_SIZE = DEFINED(STACK_SIZE) ? STACK_SIZE : 0x2000;
 
 /* The heapsize used by the application. NOTE: you need to adjust according to your application. */
 HEAP_SIZE = DEFINED(HEAP_SIZE) ? HEAP_SIZE : 0x1000;
+/* Additional heap_memsize configuration (Actual heap space to be used in the project) */
+HEAP_MEM_SIZE = DEFINED(HEAP_MEM_SIZE) ? HEAP_MEM_SIZE : 0x1000;
 
 INCLUDE ..\..\..\toolset\gcc\sam_flash.ld
 INCLUDE ..\..\..\toolset\gcc\sam_sdram.ld

@@ -1,5 +1,5 @@
-# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\main.c"
-# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src//"
+# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\main.c"
+# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src//"
 # 1 "<built-in>"
 #define __STDC__ 1
 #define __STDC_HOSTED__ 1
@@ -361,8 +361,8 @@
 # 1 "<command-line>"
 #define __USES_INITFINI__ 1
 #define __SAMV71Q21__ 1
-# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\main.c"
-# 19 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\main.c"
+# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\main.c"
+# 19 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\main.c"
 # 1 "C:\\SAMV7x\\SAMV71x\\bsp\\libboard_samv7-ek/board.h" 1
 # 77 "C:\\SAMV7x\\SAMV71x\\bsp\\libboard_samv7-ek/board.h"
 #define _BOARD_H_ 
@@ -26746,126 +26746,72 @@ extern int _write( int file, char *ptr, int len );
 
 
 #define PINS_VBUS_EN {PIO_PC16, PIOC, ID_PIOC, PIO_OUTPUT_1, PIO_DEFAULT}
-# 20 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\main.c" 2
+# 20 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\main.c" 2
 
-# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler/app_scheduler.h" 1
-# 11 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler/app_scheduler.h"
-#define APP_SCHEDULER_H 
+
+# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\ECU Abstraction\\LED control/led_ctrl.h" 1
+# 13 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\ECU Abstraction\\LED control/led_ctrl.h"
+#define __LED_CTRL_H 
+
+
+
 
 
 
 # 1 "C:\\SAMV7x\\SAMV71x\\hal\\libchip_samv7/compiler.h" 1
-# 16 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler/app_scheduler.h" 2
-# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Commons/typedefs.h" 1
-# 12 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Commons/typedefs.h"
-#define TYPEDEFS_H 
-# 23 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Commons/typedefs.h"
-#define UINT8 __attribute__ ((aligned (1))) uint8_t
-#define UINT16 __attribute__ ((aligned (2))) uint16_t
-#define UINT32 __attribute__ ((aligned (4))) uint32_t
-
-#define INT8 __attribute__ ((aligned (1))) int8_t
-#define INT16 __attribute__ ((aligned (2))) int16_t
-#define INT32 __attribute__ ((aligned (4))) int32_t
-
-
-#define VUINT8 __attribute__ ((aligned (1))) volatile uint8_t
-#define VUINT16 __attribute__ ((aligned (2))) volatile uint16_t
-#define VUINT32 __attribute__ ((aligned (4))) volatile uint32_t
-
-#define VINT8 __attribute__ ((aligned (1))) volatile int8_t
-#define VINT16 __attribute__ ((aligned (2))) volatile int16_t
-#define VINT32 __attribute__ ((aligned (4))) volatile int32_t
-
-typedef void ( * tPtr_to_function )( void );
-# 17 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler/app_scheduler.h" 2
-
-
-
-
-typedef enum
-{
-    SUSPENDED,
-    READY,
-    RUNNING
-}tTaskStates;
-
-
-typedef enum
-{
-    TASKS_1_MS,
-    TASKS_2_MS_A,
-    TASKS_2_MS_B,
-    TASKS_10_MS,
-    TASKS_50_MS,
-    TASKS_100_MS,
-    TASKS_PB_MS,
-    TASK_NULL,
-}tSchedulerTasks_ID;
-
-typedef enum{
-    TASK_PB1_EVENT,
-    TASK_PB2_EVENT,
-}tSchedulerEventTask_ID;
-
-typedef struct
-{
-    tSchedulerTasks_ID TaskId;
-    tPtr_to_function ptrTask;
-    tTaskStates enTaskState;
-    uint8_t u8Priority;
-
-}tSchedulingTask;
-# 62 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler/app_scheduler.h"
-#define TASK_SCHEDULER_INIT 0x00u
-#define TASK_SCHEDULER_RUNNING 0x01u
-#define TASK_SCHEDULER_OVERLOAD_1MS 0x02u
-#define TASK_SCHEDULER_OVERLOAD_2MS_A 0x03u
-#define TASK_SCHEDULER_OVERLOAD_2MS_B 0x04u
-#define TASK_SCHEDULER_HALTED 0xAAu
-
-#define TASK_SCH_MAX_NUMBER_TIME_TASKS 0x06u
-#define TASK_EVENT_NUMBER_MAX 0x01u
-
-#define TASK_SCHEDULER_BASE_FREQ 2000
-
-
-
-extern tSchedulingTask TimeTriggeredTasks[0x06u];
-
-
-
-
-void _ConfigureButtons( void );
-
-
-void vfnScheduler_Init(void);
-
-
-void vfnScheduler_Start(void);
-
-
-void vfnScheduler_Stop(void);
-
-void vfnSchedulePoint( tSchedulingTask * Task );
-
-
-void vfnTask_Scheduler(void);
-# 22 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\main.c" 2
-
-# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\ECU Abstraction\\LED control/led_ctrl.h" 1
-# 13 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\ECU Abstraction\\LED control/led_ctrl.h"
-#define __LED_CTRL_H 
-# 38 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\ECU Abstraction\\LED control/led_ctrl.h"
+# 21 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\ECU Abstraction\\LED control/led_ctrl.h" 2
+# 38 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\ECU Abstraction\\LED control/led_ctrl.h"
 void vfnLedCtrl_Configure( void );
 
 
 void vfnLedCtrl_BlinkingPattern(void);
-# 24 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\main.c" 2
-# 43 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\main.c"
+# 23 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\main.c" 2
+
+# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Mem_Alloc.h" 1
+# 15 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Mem_Alloc.h"
+#define MEM_ALLOC_H 
+
+# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Mem_AllocTypes.h" 1
+# 16 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Mem_AllocTypes.h"
+#define MEM_ALLOC_TYPES_H 
+
+
+
+
+
+
+
+typedef void* MemReturnType;
+
+
+
+
+
+typedef uint16_t MemSizeType;
+
+
+
+
+
+typedef struct
+{
+    uint8_t* MemStart;
+    uint8_t* MemEnd;
+    uint8_t* CurrAddr;
+    uint32_t FreeBytes;
+}MemHandlerType;
+# 18 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Mem_Alloc.h" 2
+
+
+extern uint32_t _heap_mem_start;
+extern uint32_t _heap_mem_end;
+
+MemReturnType Mem_Alloc ( MemSizeType Size );
+# 25 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\main.c" 2
+# 42 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\main.c"
 extern int main( void )
 {
- _ConfigureButtons();
+
  LED_Configure( 0 ) ;
 
  WDT_Disable(((Wdt *)0x400E1850U));
@@ -26873,15 +26819,17 @@ extern int main( void )
  SCB_EnableICache();
 
 
- vfnLedCtrl_Configure();
 
- vfnScheduler_Init();
+ Mem_Alloc(8);
 
- vfnScheduler_Start();
+  Mem_Alloc(15);
 
+  Mem_Alloc(200);
 
- for(;;)
-    {
-  vfnTask_Scheduler();
- }
+  Mem_Alloc(40);
+
+  Mem_Alloc(10000);
+
+ printf("Hola Mundo\n");
+
 }

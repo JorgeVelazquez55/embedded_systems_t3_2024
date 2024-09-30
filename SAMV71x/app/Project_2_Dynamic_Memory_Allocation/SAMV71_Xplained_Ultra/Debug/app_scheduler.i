@@ -1,5 +1,5 @@
-# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.c"
-# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler//"
+# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.c"
+# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler//"
 # 1 "<built-in>"
 #define __STDC__ 1
 #define __STDC_HOSTED__ 1
@@ -361,8 +361,8 @@
 # 1 "<command-line>"
 #define __USES_INITFINI__ 1
 #define __SAMV71Q21__ 1
-# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.c"
-# 11 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.c"
+# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.c"
+# 11 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.c"
 # 1 "C:\\SAMV7x\\SAMV71x\\hal\\libchip_samv7\\include\\samv7/system_samv71.h" 1
 # 31 "C:\\SAMV7x\\SAMV71x\\hal\\libchip_samv7\\include\\samv7/system_samv71.h"
 #define SYSTEM_SAMV71_H_INCLUDED 
@@ -846,7 +846,7 @@ void system_init_flash(uint32_t dw_clk);
 
 void sysclk_enable_usb(void);
 void sysclk_disable_usb(void);
-# 12 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.c" 2
+# 12 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.c" 2
 # 1 "C:\\SAMV7x\\SAMV71x\\bsp\\libboard_samv7-ek/board.h" 1
 # 77 "C:\\SAMV7x\\SAMV71x\\bsp\\libboard_samv7-ek/board.h"
 #define _BOARD_H_ 
@@ -26748,20 +26748,20 @@ extern int _write( int file, char *ptr, int len );
 
 
 #define PINS_VBUS_EN {PIO_PC16, PIOC, ID_PIOC, PIO_OUTPUT_1, PIO_DEFAULT}
-# 13 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.c" 2
+# 13 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.c" 2
 
-# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.h" 1
-# 11 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.h"
+# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.h" 1
+# 11 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.h"
 #define APP_SCHEDULER_H 
 
 
 
 # 1 "C:\\SAMV7x\\SAMV71x\\hal\\libchip_samv7/compiler.h" 1
-# 16 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.h" 2
-# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Commons/typedefs.h" 1
-# 12 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Commons/typedefs.h"
+# 16 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.h" 2
+# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Commons/typedefs.h" 1
+# 12 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Commons/typedefs.h"
 #define TYPEDEFS_H 
-# 23 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Commons/typedefs.h"
+# 23 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Commons/typedefs.h"
 #define UINT8 __attribute__ ((aligned (1))) uint8_t
 #define UINT16 __attribute__ ((aligned (2))) uint16_t
 #define UINT32 __attribute__ ((aligned (4))) uint32_t
@@ -26780,7 +26780,7 @@ extern int _write( int file, char *ptr, int len );
 #define VINT32 __attribute__ ((aligned (4))) volatile int32_t
 
 typedef void ( * tPtr_to_function )( void );
-# 17 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.h" 2
+# 17 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.h" 2
 
 
 
@@ -26818,7 +26818,7 @@ typedef struct
     uint8_t u8Priority;
 
 }tSchedulingTask;
-# 62 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.h"
+# 62 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.h"
 #define TASK_SCHEDULER_INIT 0x00u
 #define TASK_SCHEDULER_RUNNING 0x01u
 #define TASK_SCHEDULER_OVERLOAD_1MS 0x02u
@@ -26853,25 +26853,25 @@ void vfnSchedulePoint( tSchedulingTask * Task );
 
 
 void vfnTask_Scheduler(void);
-# 15 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.c" 2
+# 15 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.c" 2
 
-# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_tasks.h" 1
-# 11 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_tasks.h"
+# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_tasks.h" 1
+# 11 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_tasks.h"
 #define __APP_TASKS 
 
 
 
 
-# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\ECU Abstraction\\LED control/led_ctrl.h" 1
-# 13 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\ECU Abstraction\\LED control/led_ctrl.h"
+# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\ECU Abstraction\\LED control/led_ctrl.h" 1
+# 13 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\ECU Abstraction\\LED control/led_ctrl.h"
 #define __LED_CTRL_H 
-# 38 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\ECU Abstraction\\LED control/led_ctrl.h"
+# 38 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\ECU Abstraction\\LED control/led_ctrl.h"
 void vfnLedCtrl_Configure( void );
 
 
 void vfnLedCtrl_BlinkingPattern(void);
-# 17 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_tasks.h" 2
-# 35 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_tasks.h"
+# 17 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_tasks.h" 2
+# 35 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_tasks.h"
 void TASKS_LIST_1MS( void );
 
 
@@ -26890,14 +26890,14 @@ void TASKS_LIST_50MS( void );
 void TASKS_LIST_100MS( void );
 
 void TASK_PB_EVENT( void );
-# 17 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.c" 2
+# 17 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.c" 2
 
-# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\MCAL\\SysTick/systick.h" 1
-# 13 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\MCAL\\SysTick/systick.h"
+# 1 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\MCAL\\SysTick/systick.h" 1
+# 13 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\MCAL\\SysTick/systick.h"
 #define __SYSTICK_H 
-# 38 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\MCAL\\SysTick/systick.h"
+# 38 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\MCAL\\SysTick/systick.h"
 int8_t sysTick_init(int32_t base_freq, tPtr_to_function sysTick_handler);
-# 19 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.c" 2
+# 19 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.c" 2
 
 
 
@@ -26929,7 +26929,7 @@ tSchedulingTask TimeTriggeredTasks[0x06u] =
     {TASKS_50_MS, TASKS_LIST_50MS, SUSPENDED, 2},
     {TASKS_100_MS,TASKS_LIST_100MS,SUSPENDED, 1},
 };
-# 59 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.c"
+# 59 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.c"
 void vfnScheduler_Callback(void);
 
 
@@ -26974,7 +26974,7 @@ void _ConfigureButtons( void )
  PIO_EnableIt( &sw0 ) ;
 
 }
-# 111 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.c"
+# 111 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.c"
 void vfnScheduler_Init(void)
 {
 
@@ -26988,7 +26988,7 @@ void vfnScheduler_Init(void)
     gu8Scheduler_Status = 0x00u;
     priorityScheduler_Counter = 0;
 }
-# 135 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.c"
+# 135 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.c"
 void vfnScheduler_Start(void)
 {
  if (sysTick_init(2000, vfnScheduler_Callback))
@@ -26997,13 +26997,13 @@ void vfnScheduler_Start(void)
  }
     gu8Scheduler_Status = 0x01u;
 }
-# 152 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.c"
+# 152 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.c"
 void vfnScheduler_Stop(void)
 {
 
     gu8Scheduler_Status = 0xAAu;
 }
-# 166 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.c"
+# 166 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.c"
 void vfnScheduler_TaskStart( tSchedulingTask * Task )
 {
     if(Task->u8Priority == gpriorityScheduler_Counter){
@@ -27016,7 +27016,7 @@ void vfnScheduler_TaskStart( tSchedulingTask * Task )
     Task->enTaskState = SUSPENDED;
     }
 }
-# 187 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.c"
+# 187 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.c"
 void vfnScheduler_TaskActivate( tSchedulingTask * Task )
 {
     TaskScheduler_Task_ID_Activated = Task->TaskId;
@@ -27044,7 +27044,7 @@ void vfnSchedulePoint( tSchedulingTask * Task )
         TimeTriggeredTasks[TASKS_PB_MS].enTaskState = READY;
     }
 }
-# 227 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.c"
+# 227 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.c"
 void vfnTask_Scheduler(void)
 {
 
@@ -27138,12 +27138,12 @@ void vfnTask_Scheduler(void)
         }
     }
 }
-# 340 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.c"
+# 340 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.c"
 void vfnScheduler_Callback(void)
 {
 
     gu8Scheduler_Counter++;
-# 352 "C:\\SAMV7x\\SAMV71x\\app\\Project_1_Task_Scheduler\\src\\Services\\Scheduler\\app_scheduler.c"
+# 352 "C:\\SAMV7x\\SAMV71x\\app\\Project_2_Dynamic_Memory_Allocation\\src\\Services\\Scheduler\\app_scheduler.c"
     if( ( gu8Scheduler_Counter & 0x01u ) == 0x01u )
     {
         u8_100ms_Counter++;
