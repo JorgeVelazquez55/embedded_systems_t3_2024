@@ -40,9 +40,10 @@ SEARCH_DIR(.)
 /* Memory Spaces Definitions */
 MEMORY
 {
-  rom (rx)  : ORIGIN = 0x00400000, LENGTH = 0x00200000
-  ram (rwx) : ORIGIN = 0x20400000, LENGTH = 0x00060000
-  sdram(rwx): ORIGIN = 0x70000000, LENGTH = 0x00200000
+  rom (rx)            : ORIGIN = 0x00400000, LENGTH = 0x00200000
+  heap_memalloc(rwx)  : ORIGIN = 0x20400000, LENGTH = 0x00010000
+  ram (rwx)           : ORIGIN = 0x20410000, LENGTH = 0x00060000
+  sdram(rwx)          : ORIGIN = 0x70000000, LENGTH = 0x00200000
 }
 
 /* The stack size used by the application. NOTE: you need to adjust according to your application. */
@@ -50,6 +51,8 @@ STACK_SIZE = DEFINED(STACK_SIZE) ? STACK_SIZE : 0x2000;
 
 /* The heapsize used by the application. NOTE: you need to adjust according to your application. */
 HEAP_SIZE = DEFINED(HEAP_SIZE) ? HEAP_SIZE : 0x1000;
+/* Additional heap_memsize configuration (Actual heap space to be used in the project) */
+HEAP_MEM_SIZE = DEFINED(HEAP_MEM_SIZE) ? HEAP_MEM_SIZE : 0x1000;
 
 INCLUDE ..\..\..\toolset\gcc\sam_flash.ld
 INCLUDE ..\..\..\toolset\gcc\sam_sdram.ld

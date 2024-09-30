@@ -90,8 +90,18 @@ SECTIONS
     . = ALIGN(4);
     _etext = .;
 
-    .relocate : AT (_etext)
+    /* HEAP MEMORY AREA */
+    .custom_heap (NOLOAD) : AT (_etext)
     {
+		  . = ALIGN(4);
+		  _heap_mem_start = .;
+		  . = . + _heap_mem_size;
+		  . = ALIGN(4);	
+		  _heap_mem_end = .;
+          _heap_mem_size = _heap_mem_end - _heap_mem_start;
+    } > heap_memalloc
+    .relocate : AT (_etext)
+    {	 
         . = ALIGN(4);
         _srelocate = .;
         *(.ramfunc .ramfunc.*);
