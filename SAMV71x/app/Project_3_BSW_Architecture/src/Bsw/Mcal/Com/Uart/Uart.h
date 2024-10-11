@@ -14,8 +14,8 @@
 
 	/** Standard Types */
 	#include "Std_Types.h"
-  #include "Uart_Types.h"
-	#include "Uart_Cfg.h"
+  //#include "Uart_Types.h"
+	//#include "Uart_Cfg.h"
 
   /* Uart Initialization Fucntion */
   extern void Uart_Init( const uint8_t * ChannelConfigure );

@@ -11,6 +11,8 @@
 
 #include "Uart.h"
 #include "Uart_Ctrl.h"   /* Callback functions */
+/** Standard Types */
+#include "Std_Types.h"
 
 /* Example of 3 configured channels */
 const uint8_t UartConfiguredChannels[] = {

@@ -12,7 +12,12 @@
 /** Scheduler function prototypes definitions */
 #include "Uart.h"
 #include "MemAlloc.h"
-
+/** Standard Types */
+#include "Std_Types.h"
+/** UART Types */
+#include "Uart_Types.h"
+/** UART Config */
+#include "Uart_Cfg.h"
 
 /*****************************************************************************************************
 * Defines - 
@@ -44,7 +49,7 @@ static const Uart * UartRegAddr[]={ UART0, UART1, UART2, UART3, UART4 };
 * Code of module wide Private FUNCTIONS
 *****************************************************************************************************/
 
-uint8_t Uart_GetLogChannel(uint8_t PhyChannel)
+static uint8_t Uart_GetLogChannel(uint8_t PhyChannel)
 {
   uint8_t LogicalChannel = UART_CHANNEL_UNDEF; 
   uint8_t LocChIdx = 0; /* LocChIdx represent the logical channel */
