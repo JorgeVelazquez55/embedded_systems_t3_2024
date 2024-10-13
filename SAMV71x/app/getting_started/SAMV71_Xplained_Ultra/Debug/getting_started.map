@@ -7211,7 +7211,8 @@ Memory Configuration
 
 Name             Origin             Length             Attributes
 rom              0x00400000         0x00200000         xr
-ram              0x20400000         0x00060000         xrw
+heap_memalloc    0x20400000         0x00010000         xrw
+ram              0x20410000         0x00060000         xrw
 sdram            0x70000000         0x00200000         xrw
 *default*        0x00000000         0xffffffff
 
@@ -7240,6 +7241,7 @@ LOAD C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\xdmad.o
 LOAD C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\exceptions.o
                 0x00002000                STACK_SIZE = DEFINED (STACK_SIZE)?STACK_SIZE:0x2000
                 0x00001000                HEAP_SIZE = DEFINED (HEAP_SIZE)?HEAP_SIZE:0x1000
+                0x00001000                HEAP_MEM_SIZE = DEFINED (HEAP_MEM_SIZE)?HEAP_MEM_SIZE:0x1000
 
 .text           0x00400000     0x97d0
                 0x00400000                . = ALIGN (0x4)
@@ -7788,97 +7790,105 @@ LOAD C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\exception
                 0x004097d8                . = ALIGN (0x4)
                 0x004097d8                _etext = .
 
-.relocate       0x20400000      0x8a4 load address 0x004097d8
+.custom_heap    0x20400000        0x0 load address 0x004097d8
                 0x20400000                . = ALIGN (0x4)
-                0x20400000                _srelocate = .
+                0x20400000                _heap_mem_start = .
+                0x00000000                . = (. + _heap_mem_size)
+                0x00000000                . = ALIGN (0x4)
+                0x00000000                _heap_mem_end = .
+                0x00000000                _heap_mem_size = (_heap_mem_end - _heap_mem_start)
+
+.relocate       0x20410000      0x8a4 load address 0x004097d8
+                0x20410000                . = ALIGN (0x4)
+                0x20410000                _srelocate = .
  *(.ramfunc .ramfunc.*)
  *(.data .data.*)
- .data          0x20400000        0x2 C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\main.o
-                0x20400000                bLed0Active
-                0x20400001                bLed1Active
- *fill*         0x20400002        0x2 
- .data          0x20400004        0x4 C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\system_sam.o
-                0x20400004                SystemCoreClock
+ .data          0x20410000        0x2 C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\main.o
+                0x20410000                bLed0Active
+                0x20410001                bLed1Active
+ *fill*         0x20410002        0x2 
+ .data          0x20410004        0x4 C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\system_sam.o
+                0x20410004                SystemCoreClock
  .data.impure_data
-                0x20400008      0x428 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-impure.o)
+                0x20410008      0x428 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-impure.o)
  .data._impure_ptr
-                0x20400430        0x4 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-impure.o)
-                0x20400430                _impure_ptr
- .data.lconv    0x20400434       0x38 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-locale.o)
+                0x20410430        0x4 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-impure.o)
+                0x20410430                _impure_ptr
+ .data.lconv    0x20410434       0x38 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-locale.o)
  .data.lc_ctype_charset
-                0x2040046c       0x20 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-locale.o)
+                0x2041046c       0x20 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-locale.o)
  .data.__mb_cur_max
-                0x2040048c        0x4 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-locale.o)
-                0x2040048c                __mb_cur_max
+                0x2041048c        0x4 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-locale.o)
+                0x2041048c                __mb_cur_max
  .data.__malloc_av_
-                0x20400490      0x408 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-mallocr.o)
-                0x20400490                __malloc_av_
+                0x20410490      0x408 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-mallocr.o)
+                0x20410490                __malloc_av_
  .data.__malloc_trim_threshold
-                0x20400898        0x4 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-mallocr.o)
-                0x20400898                __malloc_trim_threshold
+                0x20410898        0x4 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-mallocr.o)
+                0x20410898                __malloc_trim_threshold
  .data.__malloc_sbrk_base
-                0x2040089c        0x4 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-mallocr.o)
-                0x2040089c                __malloc_sbrk_base
+                0x2041089c        0x4 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-mallocr.o)
+                0x2041089c                __malloc_sbrk_base
  .data.__wctomb
-                0x204008a0        0x4 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-wctomb_r.o)
-                0x204008a0                __wctomb
-                0x204008a4                . = ALIGN (0x4)
-                0x204008a4                _erelocate = .
+                0x204108a0        0x4 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-wctomb_r.o)
+                0x204108a0                __wctomb
+                0x204108a4                . = ALIGN (0x4)
+                0x204108a4                _erelocate = .
 
-.bss            0x204008a4       0xcc load address 0x0040a07c
-                0x204008a4                . = ALIGN (0x4)
-                0x204008a4                _sbss = .
-                0x204008a4                _szero = .
+.bss            0x204108a4       0xcc load address 0x0040a07c
+                0x204108a4                . = ALIGN (0x4)
+                0x204108a4                _sbss = .
+                0x204108a4                _szero = .
  *(.bss .bss.*)
- .bss           0x204008a4       0x14 C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\main.o
-                0x204008ac                dwTimeStamp
-                0x204008b0                dwTcCounter
-                0x204008b4                ig_test
- .bss           0x204008b8        0xc C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\syscalls.o
- .bss           0x204008c4        0x6 C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\dbg_console.o
- *fill*         0x204008ca        0x2 
- .bss           0x204008cc       0x44 C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\pio_it.o
- .bss           0x20400910       0x18 C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\timetick.o
+ .bss           0x204108a4       0x14 C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\main.o
+                0x204108ac                dwTimeStamp
+                0x204108b0                dwTcCounter
+                0x204108b4                ig_test
+ .bss           0x204108b8        0xc C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\syscalls.o
+ .bss           0x204108c4        0x6 C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\dbg_console.o
+ *fill*         0x204108ca        0x2 
+ .bss           0x204108cc       0x44 C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\pio_it.o
+ .bss           0x20410910       0x18 C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\timetick.o
  .bss.__malloc_max_total_mem
-                0x20400928        0x4 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-mallocr.o)
-                0x20400928                __malloc_max_total_mem
+                0x20410928        0x4 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-mallocr.o)
+                0x20410928                __malloc_max_total_mem
  .bss.__malloc_max_sbrked_mem
-                0x2040092c        0x4 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-mallocr.o)
-                0x2040092c                __malloc_max_sbrked_mem
+                0x2041092c        0x4 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-mallocr.o)
+                0x2041092c                __malloc_max_sbrked_mem
  .bss.__malloc_top_pad
-                0x20400930        0x4 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-mallocr.o)
-                0x20400930                __malloc_top_pad
+                0x20410930        0x4 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-mallocr.o)
+                0x20410930                __malloc_top_pad
  .bss.__malloc_current_mallinfo
-                0x20400934       0x28 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-mallocr.o)
-                0x20400934                __malloc_current_mallinfo
+                0x20410934       0x28 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-mallocr.o)
+                0x20410934                __malloc_current_mallinfo
  *(COMMON)
- COMMON         0x2040095c       0x10 C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\timetick.o
-                0x2040095c                DelayTimer
- COMMON         0x2040096c        0x4 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-reent.o)
-                0x2040096c                errno
-                0x20400970                . = ALIGN (0x4)
-                0x20400970                _ebss = .
-                0x20400970                _ezero = .
+ COMMON         0x2041095c       0x10 C:\SAMV7x\SAMV71x\app\getting_started\SAMV71_Xplained_Ultra\Debug\timetick.o
+                0x2041095c                DelayTimer
+ COMMON         0x2041096c        0x4 c:/isystem/winidea9/gcc/arm/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/cortex-m7\libc.a(lib_a-reent.o)
+                0x2041096c                errno
+                0x20410970                . = ALIGN (0x4)
+                0x20410970                _ebss = .
+                0x20410970                _ezero = .
 
-.stack          0x20400970     0x2000 load address 0x0040a148
-                0x20400970                . = ALIGN (0x8)
-                0x20400970                _sstack = .
-                0x20402970                . = (. + STACK_SIZE)
- *fill*         0x20400970     0x2000 
-                0x20402970                . = ALIGN (0x8)
-                0x20402970                _estack = .
+.stack          0x20410970     0x2000 load address 0x0040a148
+                0x20410970                . = ALIGN (0x8)
+                0x20410970                _sstack = .
+                0x20412970                . = (. + STACK_SIZE)
+ *fill*         0x20410970     0x2000 
+                0x20412970                . = ALIGN (0x8)
+                0x20412970                _estack = .
 
-.heap           0x20402970     0x1000 load address 0x0040c148
-                0x20402970                . = ALIGN (0x8)
-                0x20402970                _sheap = .
-                0x20403970                . = (. + HEAP_SIZE)
- *fill*         0x20402970     0x1000 
-                0x20403970                . = ALIGN (0x8)
-                0x20403970                _eheap = .
-                0x20403970                . = ALIGN (0x4)
-                0x20403970                _end = .
-                0x2045ffff                _ram_end_ = ((ORIGIN (ram) + 0x60000) - 0x1)
-                0x20403970                _sdram_lma = .
+.heap           0x20412970     0x1000 load address 0x0040c148
+                0x20412970                . = ALIGN (0x8)
+                0x20412970                _sheap = .
+                0x20413970                . = (. + HEAP_SIZE)
+ *fill*         0x20412970     0x1000 
+                0x20413970                . = ALIGN (0x8)
+                0x20413970                _eheap = .
+                0x20413970                . = ALIGN (0x4)
+                0x20413970                _end = .
+                0x2046ffff                _ram_end_ = ((ORIGIN (ram) + 0x60000) - 0x1)
+                0x20413970                _sdram_lma = .
 
 sdram_region
  *(sdram_region)
