@@ -18,9 +18,11 @@
 	//#include "Uart_Cfg.h"
 
   /* Uart Initialization Fucntion */
-  extern void Uart_Init( const uint8_t * ChannelConfigure );
+  //extern void Uart_Init( const uint8_t *  UartStatus);
   /* Uart Send Fucntion */
   extern void Uart_Send(uint8_t Channel);
+
+
 
   /* Example Code - Need to be removed */
   extern void UART0_Handler(void);

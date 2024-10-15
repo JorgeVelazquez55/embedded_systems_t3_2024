@@ -10,7 +10,6 @@
 */
 
 /** Scheduler function prototypes definitions */
-#include "Uart.h"
 #include "MemAlloc.h"
 /** Standard Types */
 #include "Std_Types.h"
@@ -18,6 +17,8 @@
 #include "Uart_Types.h"
 /** UART Config */
 #include "Uart_Cfg.h"
+#include "Uart.h"
+#include "uartdrv.h"
 
 /*****************************************************************************************************
 * Defines - 
@@ -71,15 +72,16 @@ static uint8_t Uart_GetLogChannel(uint8_t PhyChannel)
 * Code of module wide Public FUNCTIONS
 *****************************************************************************************************/
 
-void Uart_Init(  const uint8_t * ChannelConfigure )
+void Uart_Init (const UartStatusType* UartStatus)
 {
-  const Uart * LocUartReg;
+  Uart * LocUartReg;
   uint32_t Parity = 0;
 	uint32_t Mode = 0;
 	uint32_t Baudrate = 0;
-	uint32_t ClockSource = 0;
+	uint32_t Clock = 0;
 	uint32_t Interrupt = 0;
   uint8_t LocChIdx = 0; /* LocChIdx represent the logical channel */
+  uint8_t physicalUART = 100;
    
   /* Memory allocation for all Channel Status example */
   /* UART_CFG_CHANNELS represents the number of configured channels from configuration structure */
@@ -87,14 +89,17 @@ void Uart_Init(  const uint8_t * ChannelConfigure )
   
   for (LocChIdx = 0; LocChIdx < UART_CFG_CHANNELS; LocChIdx++)
   {
+    physicalUART = Uart_GetLogChannel(UartStatus->UartChannel[LocChIdx].ChannelId);
     /* Point to register address based of physical channel */
-    LocUartReg = UartRegAddr[ChannelConfigure[LocChIdx]];
+    LocUartReg = (Uart*)UartRegAddr[physicalUART];
+    //LocUartReg = UartRegAddr[UartStatus[LocChIdx]];
     /* Access to register for the configured channel with LocUartReg */
     /* Access to channel status structure with LocChIdx */
-    UartStatus[LocChIdx].ChannelId = ChannelConfigure[LocChIdx];    
+    //UartStatus[LocChIdx].ChannelId = ChannelConfigure[LocChIdx];    
     PMC_EnablePeripheral(UartIDs[LocChIdx]);
-
-    switch(Config->UartChannel[LocChIdx].Parity)
+    
+    //Set correct value for baudrate from structure config
+    switch(UartStatus->UartChannel[LocChIdx].Parity)
 		{
 			case (UART_PARITY_NO):
 				Parity = UART_MR_PAR_NO;
@@ -114,8 +119,8 @@ void Uart_Init(  const uint8_t * ChannelConfigure )
 
 
 		}
-
-switch(Config->UartChannel[LocChIdx].Mode)
+  //Set correct value for mode from structure config
+  switch(UartStatus->UartChannel[LocChIdx].Mode)
 		{
 			case (UART_MODE_AUTO):
 				Mode = UART_MR_CHMODE_AUTOMATIC;
@@ -127,14 +132,28 @@ switch(Config->UartChannel[LocChIdx].Mode)
 				Mode = UART_MR_CHMODE_LOCAL_LOOPBACK;
 				break;
 		}
-  ClockSource = BOARD_MCK;
+
+  //Set correct value for clock source from structure config  
+  if (UartStatus->UartChannel[LocChIdx].ClkSrc == 0)
+  {
+    Clock = BOARD_MCK;
+  }
+	else
+	{
+		Clock = UartStatus->UartChannel[LocChIdx].ClkSrc;
+	}
+  //Set correct value for baudrate from structure config
+  Baudrate = UartStatus->UartChannel[LocChIdx].Baudrate;
+  
+  UART_Configure(LocUartReg, (Parity | Mode), Baudrate, Clock);
+
 
   }
 }
 
 void Uart_Send(uint8_t Channel)
 {
-  const Uart * LocUartReg = UartRegAddr[UartStatus[Channel].ChannelId];
+  //const Uart * LocUartReg = UartRegAddr[UartStatus[Channel].ChannelId];
   /* Example Code */
   UartStatus[Channel].Counter++;
 }

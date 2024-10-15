@@ -27,13 +27,16 @@
 #include    "Button_Ctrl.h"
 /** Uart interfaces */
 #include    "Uart.h"
+#include    "uart.h"
+#include    "Uart_Cfg.h"
+#include    "Uart_Types.h"
 
 
 /*~~~~~~  Local definitions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 /*~~~~~~  Global variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-UartConfigType Config;
+UartStatusType Config;
 /*~~~~~~  Local functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void uartConfigurationInit()
 {
@@ -41,27 +44,30 @@ void uartConfigurationInit()
 	
 	//Config.UartChannel = (UartChannelType*)MemAlloc(sizeof(UartChannelType*) * (Config.UartNumberOfChannels));
 
+  Config.ChannelId = 0;
 	Config.UartChannel[0].ClkSrc = 0;
-	Config.UartChannel[0].IsrEn = UART_CFG_INT_TXRDY;
+	Config.UartChannel[0].IsrEn = UART_INT_TXRDY;
 	Config.UartChannel[0].Mode = UART_MODE_NORMAL;
 	Config.UartChannel[0].Parity = UART_PARITY_ODD;
 	Config.UartChannel[0].Baudrate = 9200;
 
-
+  Config.ChannelId = 1;
 	Config.UartChannel[1].ClkSrc = 0;
-	Config.UartChannel[1].IsrEn = UART_CFG_INT_TXRDY;
+	Config.UartChannel[1].IsrEn = UART_INT_TXRDY;
 	Config.UartChannel[1].Mode = UART_MODE_NORMAL;
 	Config.UartChannel[1].Parity = UART_PARITY_EVEN;
 	Config.UartChannel[1].Baudrate = 28800;
 
+  Config.ChannelId = 2;  
 	Config.UartChannel[2].ClkSrc = 0;
-	Config.UartChannel[2].IsrEn = UART_CFG_INT_TXRDY;
+	Config.UartChannel[2].IsrEn = UART_INT_TXRDY;
 	Config.UartChannel[2].Mode = UART_MODE_LOOPBACK;
-	Config.UartChannel[2].Parity = UART_CFG_PARITY_NO;
+	Config.UartChannel[2].Parity = UART_PARITY_NO;
 	Config.UartChannel[2].Baudrate = 115200;
 
+  Config.ChannelId = 3;  
 	Config.UartChannel[3].ClkSrc = 0;
-	Config.UartChannel[3].IsrEn = UART_CFG_INT_TXRDY;
+	Config.UartChannel[3].IsrEn = UART_INT_TXRDY;
 	Config.UartChannel[3].Mode = UART_MODE_LOOPBACK;
 	Config.UartChannel[3].Parity = UART_PARITY_EVEN;
 	Config.UartChannel[3].Baudrate = 19200;
@@ -97,7 +103,8 @@ extern int main( void )
   
     /* Uart Inititalization */
     printf( "-- Uart Initialization --\n\r" ) ;
-	uartConfigurationInit()ñ
+   	uartConfigurationInit();
+    //Uart_Init(&Config[0]);
     Uart_Init(&UartConfiguredChannels[0]);
 
   
