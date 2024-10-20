@@ -19,6 +19,8 @@
 #include    "Std_Types.h"
 /** Task scheduler definitions */
 #include    "SchM.h"
+#include    "chip.h"
+
 /** LED control definitions */ 
 #include    "Led_Ctrl.h"
 /** Watchdog control function prototypes definitions */
@@ -27,9 +29,12 @@
 #include    "Button_Ctrl.h"
 /** Uart interfaces */
 #include    "Uart.h"
-#include    "uart.h"
+//#include    "uart.h"
 #include    "Uart_Cfg.h"
 #include    "Uart_Types.h"
+
+#include    "uart.h"
+#include    "pmc.h"
 
 
 /*~~~~~~  Local definitions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -103,9 +108,12 @@ extern int main( void )
   
     /* Uart Inititalization */
     printf( "-- Uart Initialization --\n\r" ) ;
+    Uart_ConfigurePIO();
    	uartConfigurationInit();
-    //Uart_Init(&Config[0]);
-    Uart_Init(&UartConfiguredChannels[0]);
+    Uart_Init(&Config);
+    //Uart_Init(&UartConfiguredChannels[0]);
+    Uart_Send(0);
+  
 
   
 	/* Scheduler Inititalization */

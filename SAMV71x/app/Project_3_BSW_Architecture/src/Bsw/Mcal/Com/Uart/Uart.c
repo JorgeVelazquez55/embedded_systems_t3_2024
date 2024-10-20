@@ -10,15 +10,19 @@
 */
 
 /** Scheduler function prototypes definitions */
-#include "MemAlloc.h"
+#include "Uart.h"
+#include "Mem_Alloc.h"
 /** Standard Types */
 #include "Std_Types.h"
 /** UART Types */
 #include "Uart_Types.h"
 /** UART Config */
 #include "Uart_Cfg.h"
-#include "Uart.h"
+#include "pmc.h"
+#include "uart.h"
 #include "uartdrv.h"
+
+//#include "C:\SAMV7x\SAMV71x\hal\libchip_samv7\include\uartdrv.h"
 
 /*****************************************************************************************************
 * Defines - 
@@ -47,6 +51,12 @@ UartStatusType *UartStatus;
 static const Uart * UartRegAddr[]={ UART0, UART1, UART2, UART3, UART4 };
 
 static const uint32_t UartIDs[] = { ID_UART0, ID_UART1, ID_UART2, ID_UART4, ID_UART3 };
+
+static const uint8_t IRQn[]={ UART0_IRQn, UART1_IRQn, UART2_IRQn, UART3_IRQn, UART4_IRQn};
+
+uint8_t  *		pu8SerialCtrl_ReadTxDataPtr;
+uint8_t 		  u8SerialCtrl_TxData[] = {"Uart0"};
+uint16_t      u16SerialCtrl_TxLength;
 
 /*****************************************************************************************************
 * Code of module wide Private FUNCTIONS
@@ -144,8 +154,17 @@ void Uart_Init (const UartStatusType* UartStatus)
 	}
   //Set correct value for baudrate from structure config
   Baudrate = UartStatus->UartChannel[LocChIdx].Baudrate;
-  
   UART_Configure(LocUartReg, (Parity | Mode), Baudrate, Clock);
+  NVIC_ClearPendingIRQ(IRQn[physicalUART]);
+  NVIC_SetPriority(IRQn[physicalUART], 1);
+
+  Interrupt = UartStatus->UartChannel[LocChIdx].IsrEn;
+
+	UART_SetTransmitterEnabled(LocUartReg, Interrupt);
+  UART_SetReceiverEnabled(LocUartReg, Interrupt);
+		
+  UART_EnableIt(LocUartReg, Interrupt);
+  
 
 
   }
@@ -153,9 +172,11 @@ void Uart_Init (const UartStatusType* UartStatus)
 
 void Uart_Send(uint8_t Channel)
 {
-  //const Uart * LocUartReg = UartRegAddr[UartStatus[Channel].ChannelId];
-  /* Example Code */
-  UartStatus[Channel].Counter++;
+    Uart * LocUartReg;
+    LocUartReg = (Uart*)UartRegAddr[Channel];
+	  pu8SerialCtrl_ReadTxDataPtr = &u8SerialCtrl_TxData[0];
+    u16SerialCtrl_TxLength = sizeof(u8SerialCtrl_TxData);
+	  UART_SendBuffer(LocUartReg, pu8SerialCtrl_ReadTxDataPtr, u16SerialCtrl_TxLength);
 }
 
 

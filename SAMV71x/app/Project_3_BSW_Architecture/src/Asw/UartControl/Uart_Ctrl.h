@@ -32,6 +32,7 @@
 /*****************************************************************************************************
 * Declaration of module wide FUNCTIONS
 *****************************************************************************************************/
+extern void Uart_ConfigurePIO( void );
 
 /** Uart Control Exported Functions */
 extern void UartCtrl_2ms( void );

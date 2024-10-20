@@ -12,7 +12,7 @@
 * Include files
 *****************************************************************************************************/
 /** Own headers */
-#include  "Uart_Ctrl.h"
+#include "Uart_Ctrl.h"
 #include "Uart.h"
 
 /*****************************************************************************************************
@@ -34,7 +34,33 @@
 /****************************************************************************************************
 * Definition of module wide (CONST-) CONSTANTs 
 *****************************************************************************************************/
+/** Pin definition: Pin type definition is located at pio.h file */
+/* 
+  typedef struct _Pin
+  {
+  	uint32_t mask;     PIO_PA9                                      -> Bitmask indicating which pin(s) to configure.
+  	Pio    *pio;       PIOA                                         -> Pointer to the PIO controller which has the pin(s).
+  	uint8_t id;        ID_PIOA                                      -> Peripheral ID of the PIO controller which has the pin(s).
+  	uint8_t type;      PIO_INPUT                                    -> Pin Type
+  	uint8_t attribute; PIO_PULLUP | PIO_DEBOUNCE | PIO_IT_RISE_EDGE -> Pin attribute
+  } Pin ;
+*/
+/** UART pins (UTXD0 and URXD0) definitions, PA9,10. */
+#define PINS_UART0  \
+		{PIO_PA9A_URXD0 | PIO_PA10A_UTXD0, PIOA, ID_PIOA, PIO_PERIPH_A, PIO_DEFAULT}
 
+/****************************************************************************************************
+* Code of module wide FUNCTIONS
+*****************************************************************************************************/
+/** SW0 Pin Definition, used to configure the Pin and Pin Interrupt, see ConfigureSW0Button function  */
+const Pin PinUartTx0[] = PINS_UART0;
+
+
+void Uart_ConfigurePIO( void )
+{
+	/* Configure PinSW0 as input. */
+	PIO_Configure(PinUartTx0, PIO_LISTSIZE(PinUartTx0) ) ;
+}
 
 /****************************************************************************************************
 * Code of module wide FUNCTIONS
