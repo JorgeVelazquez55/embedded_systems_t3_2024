@@ -1,10 +1,10 @@
-CONVERTING	C:\Users\jorge\Desktop\task 3 - basic software architecture\SAMV71x\app\08_UartBase\SAMV71_Xplained_Ultra\Debug\UartBase.elf
-LOADING	C:\Users\jorge\Desktop\task 3 - basic software architecture\SAMV71x\app\08_UartBase\SAMV71_Xplained_Ultra\Debug\UartBase.elf
+LOADING	C:\SAMV7x\SAMV71x\app\Project_3_BSW_Architecture\SAMV71_Xplained_Ultra\Debug\UartBase.elf
 ANALYZING
 ANALYZING
 EMULATION	POD: Cortex (JTAG,SWD)   CPU: Cortex-M7
 DEBUG	PROTOCOL: SWD; RESET: SoC
-LOADING 	43104 bytes
+CPU	CPUID=0x410FC271 (M7 variant 0, revision 1)
+LOADING 	43016 bytes
 UMI INFO	Loading UMI monitor...
 PROGRAMMING	Atmel ATSAMV7 (2048 kB) (3 sectors)
 UMI INFO	Unloading UMI monitor...

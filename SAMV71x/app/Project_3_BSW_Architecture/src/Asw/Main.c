@@ -118,11 +118,11 @@ extern int main( void )
   
 	/* Scheduler Inititalization */
 	printf( "-- Scheduler Initialization --\n\r" ) ;
-	SchM_Init(ScheduleConfig);
+	//SchM_Init(ScheduleConfig);
 	
 	/* Should never reach this code */
-	for(;;)
-    {
-		printf( "-- Unexpected Error at Scheduler Initialization --\n\r" ) ;
-	}
+	//for(;;)
+    //{
+		//printf( "-- Unexpected Error at Scheduler Initialization --\n\r" ) ;
+	//}
 }

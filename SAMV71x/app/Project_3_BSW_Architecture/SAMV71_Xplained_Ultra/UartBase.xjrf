@@ -49,10 +49,9 @@
       </History>
       <PI.0>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>40</C>
-       <L>361</L>
+       <L>389</L>
        <P>..\..\..\toolset\gcc\startup_sam.c</P>
-       <VL>249</VL>
+       <VL>350</VL>
       </PI.0>
       <PI.1>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -63,27 +62,29 @@
       </PI.1>
       <PI.10>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>39</C>
-       <L>170</L>
+       <C>5</C>
+       <L>17</L>
        <P>..\src\Bsw\Mcal\Com\Uart\Uart.c</P>
+       <VL>90</VL>
       </PI.10>
       <PI.11>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>29</C>
-       <L>34</L>
+       <L>35</L>
        <P>..\src\Asw\UartControl\Uart_Ctrl.h</P>
       </PI.11>
       <PI.12>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <L>55</L>
+       <C>1</C>
+       <L>62</L>
        <P>..\src\Asw\UartControl\Uart_Ctrl.c</P>
        <VL>15</VL>
       </PI.12>
       <PI.13>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <L>43</L>
+       <C>1</C>
+       <L>102</L>
        <P>..\src\Asw\Main.c</P>
-       <VL>15</VL>
+       <VL>78</VL>
       </PI.13>
       <PI.14>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -831,7 +832,7 @@
      <Documents.0>
       <ActiveDocument>
        <Maximized>True</Maximized>
-       <RelativeFileName>..\src\Bsw\Mcal\Com\Uart\Uart.c</RelativeFileName>
+       <RelativeFileName>..\src\Asw\Main.c</RelativeFileName>
       </ActiveDocument>
       <Editor.0>
        <FileBarIndex>1</FileBarIndex>
@@ -842,7 +843,7 @@
        <RelativeFileName>..\src\Asw\LedCtrl\Led_Ctrl.c</RelativeFileName>
       </Editor.0>
       <Editor.1>
-       <FileBarIndex>3</FileBarIndex>
+       <FileBarIndex>2</FileBarIndex>
        <RectPosBottom>690</RectPosBottom>
        <RectPosLeft>208</RectPosLeft>
        <RectPosRight>830</RectPosRight>
@@ -850,7 +851,7 @@
        <RelativeFileName>..\src\Asw\Main.c</RelativeFileName>
       </Editor.1>
       <Editor.10>
-       <FileBarIndex>4</FileBarIndex>
+       <FileBarIndex>6</FileBarIndex>
        <RectPosBottom>617</RectPosBottom>
        <RectPosLeft>0</RectPosLeft>
        <RectPosRight>1092</RectPosRight>
@@ -858,7 +859,7 @@
        <RelativeFileName>..\..\..\hal\libchip_samv7\chip.h</RelativeFileName>
       </Editor.10>
       <Editor.11>
-       <FileBarIndex>2</FileBarIndex>
+       <FileBarIndex>3</FileBarIndex>
        <RectPosBottom>643</RectPosBottom>
        <RectPosLeft>26</RectPosLeft>
        <RectPosRight>1118</RectPosRight>
@@ -866,7 +867,7 @@
        <RelativeFileName>..\..\..\hal\libchip_samv7\include\pio.h</RelativeFileName>
       </Editor.11>
       <Editor.12>
-       <FileBarIndex>7</FileBarIndex>
+       <FileBarIndex>8</FileBarIndex>
        <RectPosBottom>796</RectPosBottom>
        <RectPosLeft>49</RectPosLeft>
        <RectPosRight>1439</RectPosRight>
@@ -890,7 +891,7 @@
        <RelativeFileName>..\..\..\toolset\gcc\startup_sam.c</RelativeFileName>
       </Editor.14>
       <Editor.2>
-       <FileBarIndex>5</FileBarIndex>
+       <FileBarIndex>4</FileBarIndex>
        <RectPosBottom>548</RectPosBottom>
        <RectPosLeft>104</RectPosLeft>
        <RectPosRight>919</RectPosRight>
@@ -898,7 +899,7 @@
        <RelativeFileName>..\src\Asw\UartControl\Uart_Ctrl.c</RelativeFileName>
       </Editor.2>
       <Editor.3>
-       <FileBarIndex>6</FileBarIndex>
+       <FileBarIndex>5</FileBarIndex>
        <RectPosBottom>903</RectPosBottom>
        <RectPosLeft>286</RectPosLeft>
        <RectPosRight>1378</RectPosRight>
@@ -906,7 +907,7 @@
        <RelativeFileName>..\src\Asw\UartControl\Uart_Ctrl.h</RelativeFileName>
       </Editor.3>
       <Editor.4>
-       <FileBarIndex>8</FileBarIndex>
+       <FileBarIndex>7</FileBarIndex>
        <RectPosBottom>373</RectPosBottom>
        <RectPosLeft>26</RectPosLeft>
        <RectPosRight>893</RectPosRight>
@@ -2196,7 +2197,7 @@
        </Items.0>
       </OSWindow>
       <ProjectWindow>
-       <Selected>HAL</Selected>
+       <Selected>Main.c</Selected>
        <Items.0>
         <__>
          <Name>Files</Name>
@@ -2614,7 +2615,7 @@
           <CC_PeriodicCycles>0</CC_PeriodicCycles>
           <CC_PeriodicGenerate>0</CC_PeriodicGenerate>
           <CC_RestartCounter>0</CC_RestartCounter>
-          <Enabled>1</Enabled>
+          <Enabled>0</Enabled>
           <EnableExceptionTrace>0</EnableExceptionTrace>
           <EnableITMStimulus type="B">AAAAAAAA</EnableITMStimulus>
           <EnableITMTimestamps>0</EnableITMTimestamps>

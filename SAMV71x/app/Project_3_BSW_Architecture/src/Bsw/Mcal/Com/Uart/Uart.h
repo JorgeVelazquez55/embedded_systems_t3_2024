@@ -13,23 +13,31 @@
 	#define _UART_H
 
 	/** Standard Types */
-	#include "Std_Types.h"
-  //#include "Uart_Types.h"
-	//#include "Uart_Cfg.h"
+	//#include "Std_Types.h"
+	#include "Uart_Types.h"
+	#include "Uart_Cfg.h"
 
-  /* Uart Initialization Fucntion */
-  //extern void Uart_Init( const uint8_t *  UartStatus);
-  /* Uart Send Fucntion */
-  extern void Uart_Send(uint8_t Channel);
+	/*UART Mask Definition*/
+	#define UART_MASK_TXRDY		2
 
 
+	/* Uart Initialization Fucntion */
+	extern void Uart_Init(const UartConfigType *ChannelConfigure );
 
-  /* Example Code - Need to be removed */
-  extern void UART0_Handler(void);
-  extern void UART1_Handler(void);
-  extern void UART2_Handler(void);
-  extern void UART3_Handler(void);
-  extern void UART4_Handler(void);
+	/* Uart Send Fucntion */
+	extern Std_ReturnType Uart_SendBuffer(uint8_t Channel, uint8_t* Buffer, uint16_t Length);
+	extern void Uart_SendByteInt(uint8_t Channel, uint8_t Byte);
+
+	extern Std_ReturnType Uart_SetBaudrate(uint8_t Channel, uint32_t Baudrate);
+	extern void Uart_SetTxEnable(uint8_t Channel, uint32_t Enable);
+
+
+	/* Example Code - Need to be removed */
+	extern void UART0_Handler(void);
+	extern void UART1_Handler(void);
+	extern void UART2_Handler(void);
+	extern void UART3_Handler(void);
+	extern void UART4_Handler(void);
 
 /*============================================================================*/
 #endif /* _UART_H */

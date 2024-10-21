@@ -14,7 +14,7 @@
   #include "Std_Types.h"
 
 /* configure number of channels*/
-  #define UART_CFG_CHANNELS (4)
+  #define UART_CFG_CHANNELS (5)
 /* configure id of channel*/
   #define UART_CFG_CHANNEL0  (0)
   #define UART_CFG_CHANNEL1  (1)
@@ -41,10 +41,31 @@
   #define UART_PARITY_MARK 3
   #define UART_PARITY_NO 4
   /* clock configuration */
-  #define UART_PER_CLK 0
-  #define UART_PMC_CLK 1
+  #define UART_CFG_PER_CLK 0
+  #define UART_CFG_PMC_CLK 1
 
-  extern const uint8_t UartConfiguredChannels[];
 
+	typedef struct {
+		uint8_t				ChannelId;				          // Physical Uart Channel Identifier
+		uint8_t				IsrEn;					            // Uart Interrupts enable(Transmission, Reception and Error)
+		uint8_t				Mode;					              // Uart Channel Mode: 0:Normal / 1:Loopback
+		uint8_t				Parity;				    	        // Parity Type= 0: Even / 1 : Odd
+		uint32_t			Baudrate;				            // Specifies the baud rate of the Uart channel in bits per second
+		UartNotification	TxNotification;		  	  // End of transmission notification
+	}UartChannelType;
+
+/*Configuration of the UART (Uart driver) module*/
+	typedef struct {
+		uint8_t			UartNumberOfChannels;		//Number of channels to be configured
+		uint8_t			ClkSrc;						      //Clock Source:	0: Peripheral Clock	/ 1 : Programmable Clock
+		UartChannelType	*UartCh;				    //Configuration of the UART (Uart driver) module
+	}UartConfigType;
+
+
+	extern const UartChannelType UartCh[];
+	extern UartConfigType UartConfig[];
+
+
+#endif /* _UART_CFG_H */
 
 #endif /* _UART_CFG_H */
