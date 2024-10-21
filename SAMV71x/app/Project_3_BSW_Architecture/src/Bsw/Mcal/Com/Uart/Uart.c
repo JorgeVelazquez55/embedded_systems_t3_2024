@@ -11,7 +11,7 @@
 
 /** Scheduler function prototypes definitions */
 #include "Uart.h"
-#include "MemAlloc.h"
+#include "Mem_Alloc.h"
 
 
 
@@ -66,6 +66,7 @@ uint8_t Uart_GetLogChannel(uint8_t PhyChannel)
 }
 
 /* Interface:  Initialization */
+
 void Uart_Init(const UartConfigType* ChannelConfigure )
 { 
     Uart * LocUartReg;
@@ -154,6 +155,18 @@ void Uart_SetTxEnable(uint8_t Channel, uint32_t Enable) {
 }
 
 
+/*	Enables or disables the receiver of the UART module*/
+void Uart_SeRxEnable(uint8_t Channel, uint32_t Enable) {
+    /*	The Uart_SetRxEnable function shall support runtime enable/disable of the Uart receiver specified by the Enable
+        parameter.*/
+    Uart* LocUartReg = UartRegAddr[Channel];
+    if (Enable) {
+        LocUartReg->UART_CR = UART_CR_RXEN;
+    }
+    else {
+        LocUartReg->UART_CR = UART_CR_RXDIS;
+    }
+}
 
 void Uart_SendByteInt(uint8_t Channel, uint8_t Byte)
 {
@@ -182,6 +195,16 @@ Std_ReturnType Uart_SendBuffer(uint8_t Channel, uint8_t* Buffer, uint16_t Length
     return E_NOT_OK;
 }
 
+
+/*  Reads and returns the current status of the addressed UART module*/
+uint32_t Uart_GetStatus(uint8_t Channel) {
+    Uart* LocUartReg = UartRegAddr[Channel];
+    return LocUartReg->UART_SR;
+}
+
+uint8_t Uart_GetByte(uint8_t Channel) {
+
+}
 
 
 /*****************************************************************************************************
