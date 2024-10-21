@@ -68,4 +68,3 @@
 
 #endif /* _UART_CFG_H */
 
-#endif /* _UART_CFG_H */
