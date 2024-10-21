@@ -49,10 +49,9 @@
       </History>
       <PI.0>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>40</C>
-       <L>32</L>
+       <C>27</C>
+       <L>49</L>
        <P>..\src\Asw\UartControl\Uart_Ctrl.h</P>
-       <VL>18</VL>
       </PI.0>
       <PI.1>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -132,7 +131,6 @@
        <C>2</C>
        <L>56</L>
        <P>..\src\Bsw\Mcal\Com\Uart\Uart_Cfg.h</P>
-       <VL>21</VL>
       </PI.2>
       <PI.20>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -266,10 +264,9 @@
       </PI.39>
       <PI.4>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>21</C>
-       <L>146</L>
+       <C>39</C>
+       <L>16</L>
        <P>..\src\Asw\Main.c</P>
-       <VL>113</VL>
       </PI.4>
       <PI.40>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -351,14 +348,12 @@
        <C>17</C>
        <L>196</L>
        <P>..\src\Bsw\Mcal\Com\Uart\Uart.c</P>
-       <VL>155</VL>
       </PI.7>
       <PI.8>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>29</C>
-       <L>189</L>
+       <C>42</C>
+       <L>11</L>
        <P>..\src\Asw\UartControl\Uart_Ctrl.c</P>
-       <VL>121</VL>
       </PI.8>
       <PI.9>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -836,7 +831,7 @@
      <Documents.0>
       <ActiveDocument>
        <Maximized>True</Maximized>
-       <RelativeFileName>..\src\Bsw\Mcal\Com\Uart\Uart.h</RelativeFileName>
+       <RelativeFileName>..\src\Asw\UartControl\Uart_Ctrl.c</RelativeFileName>
       </ActiveDocument>
       <Editor.0>
        <FileBarIndex>4</FileBarIndex>
@@ -2153,7 +2148,7 @@
        </Items.0>
       </OSWindow>
       <ProjectWindow>
-       <Selected>Main.c</Selected>
+       <Selected></Selected>
        <Items.0>
         <__>
          <Name>Files</Name>
