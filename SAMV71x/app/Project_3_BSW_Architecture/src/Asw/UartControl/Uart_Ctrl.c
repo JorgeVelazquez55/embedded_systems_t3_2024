@@ -7,96 +7,178 @@
 \date       25/Sep/2018
 */
 /****************************************************************************************************/
-
+ 
 /*****************************************************************************************************
 * Include files
 *****************************************************************************************************/
 /** Own headers */
 #include "Uart_Ctrl.h"
+#include "Uart_Cfg.h"
+#include "Std_Types.h"
 #include "Uart.h"
-
+ 
 /*****************************************************************************************************
 * Definition of module wide VARIABLEs 
 *****************************************************************************************************/
-
-/****************************************************************************************************
-* Declaration of module wide FUNCTIONs 
-****************************************************************************************************/
-
-/****************************************************************************************************
-* Definition of module wide MACROs / #DEFINE-CONSTANTs 
-*****************************************************************************************************/
-
-/****************************************************************************************************
-* Declaration of module wide TYPEs 
-*****************************************************************************************************/
-
-/****************************************************************************************************
-* Definition of module wide (CONST-) CONSTANTs 
-*****************************************************************************************************/
-/** Pin definition: Pin type definition is located at pio.h file */
-/* 
-  typedef struct _Pin
-  {
-  	uint32_t mask;     PIO_PA9                                      -> Bitmask indicating which pin(s) to configure.
-  	Pio    *pio;       PIOA                                         -> Pointer to the PIO controller which has the pin(s).
-  	uint8_t id;        ID_PIOA                                      -> Peripheral ID of the PIO controller which has the pin(s).
-  	uint8_t type;      PIO_INPUT                                    -> Pin Type
-  	uint8_t attribute; PIO_PULLUP | PIO_DEBOUNCE | PIO_IT_RISE_EDGE -> Pin attribute
-  } Pin ;
-*/
-/** UART pins (UTXD0 and URXD0) definitions, PA9,10. */
-#define PINS_UART0  \
-		{PIO_PA9A_URXD0 | PIO_PA10A_UTXD0, PIOA, ID_PIOA, PIO_PERIPH_A, PIO_DEFAULT}
-
+uint8_t*    pu8SerialCtrl_RxDataPtr;
+ 
+uint16_t 		StringLength0;
+uint16_t 		StringLength1;
+uint16_t 		StringLength2;
+uint16_t 		StringLength3;
+uint16_t 		StringLength4;
+uint8_t*    ptrString0;
+uint8_t*    ptrString1;
+uint8_t*    ptrString2;
+uint8_t*    ptrString3;
+uint8_t*    ptrString4;
+ 
+uint8_t 		String0[] = { "UART0 @ 4800 bps" };
+uint8_t 		String1[] = { "UART1 @ 9600 bps" };
+uint8_t 		String2[] = { "UART2 @ 19200 bps" };
+uint8_t 		String3[] = { "UART3 @ 57600 bps" };
+uint8_t 		String4[] = { "UART4 @ 115200 bps" };
+ 
+ 
+ 
 /****************************************************************************************************
 * Code of module wide FUNCTIONS
 *****************************************************************************************************/
-/** SW0 Pin Definition, used to configure the Pin and Pin Interrupt, see ConfigureSW0Button function  */
-const Pin PinUartTx0[] = PINS_UART0;
-
-
-void Uart_ConfigurePIO( void )
-{
-	/* Configure PinSW0 as input. */
-	PIO_Configure(PinUartTx0, PIO_LISTSIZE(PinUartTx0) ) ;
-}
-
-/****************************************************************************************************
-* Code of module wide FUNCTIONS
-*****************************************************************************************************/
-
+ 
 void UartCtrl_2ms( void )
 {
-  /* Example Code, need to be removed */
-  /* Uart Logic Channel 0 */
-  Uart_Send(0);
+ 
 }
-
+ 
 void UartCtrl_50ms( void )
 {
-  /* Example Code, need to be removed */
-  /* Uart Logic Channel 1 */
-  Uart_Send(1);
+ 
 }
-
+ 
 void UartCtrl_100ms( void )
 {
-  /* Example Code, need to be removed */
-  /* Uart Logic Channel 2 */
-  Uart_Send(2);
+  /*Call to Uart Trigger*/
+	UartCtrl_TriggerEvent();
 }
-
+ 
 void UartCtrl_TriggerEvent( void )
 {
-  /* Example Code, need to be removed */
-  /* These function handlers shall be invoked upon interrupt request */
-  UART0_Handler();
-  UART1_Handler();
-  UART2_Handler();
-  UART3_Handler();
-  UART4_Handler();
-  /* In your solution this trigger can start a buffer transmission */
+  //Initializing/reseting buffer of UART0 for testing
+	ptrString0 = &String0[0];
+	StringLength0 = sizeof(String0);
+	Uart_EnableInt(UART_CFG_PHY_CHANNEL0, UART_MASK_TXRDY, 1);
+  //Initializing/reseting buffer of UART1 for testing
+	ptrString1 = &String1[0];
+	StringLength1 = sizeof(String1);
+	Uart_EnableInt(UART_CFG_PHY_CHANNEL1, UART_MASK_TXRDY, 1);
+  //Initializing/reseting buffer of UART2 for testing
+	ptrString2 = &String2[0];
+	StringLength2 = sizeof(String2);
+	Uart_EnableInt(UART_CFG_PHY_CHANNEL2, UART_MASK_TXRDY, 1);
+  //Initializing/reseting buffer of UART3 for testing
+	ptrString3 = &String3[0];
+	StringLength3 = sizeof(String3);
+	Uart_EnableInt(UART_CFG_PHY_CHANNEL3, UART_MASK_TXRDY, 1);
+	//Initializing/reseting buffer of UART4 for testing
+	ptrString4 = &String4[0];
+	StringLength4 = sizeof(String4);
+	Uart_EnableInt(UART_CFG_PHY_CHANNEL4, UART_MASK_TXRDY, 1);
+ 
 }
-
+ 
+ 
+void vfnSerialCtrl_Transfer0(void)
+{
+	if (StringLength0 > 0)
+	{
+		/* Send out one byte at a time */
+		Uart_SendByteInt(UART_CFG_PHY_CHANNEL0, *ptrString0);
+		/* point to next element */
+		ptrString0++;
+		/* update number of pending bytes to transfer */
+		StringLength0--;
+	}
+	else
+	{
+		//Disable the interruption once that done
+		Uart_EnableInt(UART_CFG_PHY_CHANNEL0, UART_MASK_TXRDY, 0);
+	}
+ 
+}
+ 
+void vfnSerialCtrl_Transfer1(void)
+{
+	if (StringLength1 > 0)
+	{
+		/* Send out one byte at a time */
+		Uart_SendByteInt(UART_CFG_PHY_CHANNEL1, *ptrString1);
+		/* point to next element */
+		ptrString1++;
+		/* update number of pending bytes to transfer */
+		StringLength1--;
+	}
+	else
+	{
+		//Disable the interruption once that done
+		Uart_EnableInt(UART_CFG_PHY_CHANNEL1, UART_MASK_TXRDY, 0);
+	}
+}
+ 
+void vfnSerialCtrl_Transfer2(void)
+{
+	if (StringLength2 > 0)
+	{
+		/* Send out one byte at a time */
+		Uart_SendByteInt(UART_CFG_PHY_CHANNEL2, *ptrString2);
+		/* point to next element */
+		ptrString2++;
+		/* update number of pending bytes to transfer */
+		StringLength2--;
+	}
+	else
+	{
+		//Disable the interruption once that done
+		Uart_EnableInt(UART_CFG_PHY_CHANNEL2, UART_MASK_TXRDY, 0);
+	}
+}
+ 
+void vfnSerialCtrl_Transfer3(void)
+{
+	if (StringLength3 > 0)
+	{
+		/* Send out one byte at a time */
+		Uart_SendByteInt(UART_CFG_PHY_CHANNEL3, *ptrString3);
+		/* point to next element */
+		ptrString3++;
+		/* update number of pending bytes to transfer */
+		StringLength3--;
+	}
+	else
+	{
+		//Disable the interruption once that done
+		Uart_EnableInt(UART_CFG_PHY_CHANNEL3, UART_MASK_TXRDY, 0);
+	}
+}
+ 
+void vfnSerialCtrl_Transfer4(void)
+{
+	if (StringLength4 > 0)
+	{
+		/* Send out one byte at a time */
+		Uart_SendByteInt(UART_CFG_PHY_CHANNEL4, *ptrString4);
+ 
+		/* point to next element */
+		ptrString4++;
+		/* update number of pending bytes to transfer */
+		StringLength4--;
+ 
+	}
+	else
+	{
+		//Disable the interruption once that done
+		Uart_EnableInt(UART_CFG_PHY_CHANNEL4, UART_MASK_TXRDY, 0);  
+  }
+}
+ 
+ 
 /*******************************************************************************/
