@@ -1,10 +1,10 @@
 /****************************************************************************************************/
 /**
 \file       Uart_Ctrl.h
-\brief      MCU abstraction level - Uart control
-\author     Francisco Martinez
+\brief      Application layer - Uart control
+\author     Gustavo A, Roberto V, Jorge V,
 \version    1.0
-\date       25/Sep/2018
+\date       21/10/2024
 */
 /****************************************************************************************************/
  

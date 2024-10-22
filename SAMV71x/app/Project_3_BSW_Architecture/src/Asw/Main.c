@@ -3,10 +3,9 @@
   \mainpage
   \n 
   \brief        Main application (main module)
-  \author       Abraham Tezmol Otero, M.S.E.E
-  \project      Tau 
+  \author       Gustavo A, Roberto V, Jorge V, 
   \version      1.0
-  \date         12/Jun/2016
+  \date         21/10/2024
   Program compiled with  WinIDEA Open Build 9.12.256 (54401), tested on Atmel SAMV71 Xplained Ultra
 */
 /****************************************************************************************************/
