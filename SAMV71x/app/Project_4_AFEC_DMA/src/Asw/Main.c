@@ -27,6 +27,10 @@
 #include    "Button_Ctrl.h"
 /** Floating Point Unit */
 #include    "Fpu.h"
+/** Timer Counter */
+#include    "tc.h"
+#include    "timetick.h"
+#include    "timerC.h"
 
 
 /*~~~~~~  Local definitions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -45,6 +49,11 @@ int32_t     s32_int1;
 int32_t     s32_int2;
 
 /*~~~~~~  Local functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/**
+ *  Configure Timer Counter 0 to generate an interrupt every 250ms.
+ */
+
+
 
 /*----------------------------------------------------------------------------
  *        Exported functions
@@ -98,6 +107,13 @@ extern int main( void )
 	s32_result = s32_int1 * s32_int2;
 	s32_result = s32_int1 / s32_int2;  
   /************************************************************************************/
+
+	/* Configure systick for 1 ms. */
+	TimeTick_Configure ();
+
+	printf( "Configure TC.\n\r" );
+	_ConfigureTc() ;
+
   
       /* Initialize DAC */
   printf( "-- Dac --\n\r" ) ;
@@ -108,7 +124,8 @@ extern int main( void )
   /* Scheduler Inititalization */
 	printf( "-- Scheduler Initialization --\n\r" ) ;
 	SchM_Init(ScheduleConfig);
-	
+
+
 	/* Should never reach this code */
 	for(;;)
     {

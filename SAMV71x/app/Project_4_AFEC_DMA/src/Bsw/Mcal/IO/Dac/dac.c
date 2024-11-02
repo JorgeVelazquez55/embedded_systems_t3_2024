@@ -2,10 +2,10 @@
 /**
 \file       dac.c
 \brief      MCAL abstraction level - Digital to Analog Converter Controller configuration and interrupt handling.
-\author     Abraham Tezmol
+\author     Jorge V, Gustavo S, Roberto V
 \version    1.0
-\project    Tau 
-\date       26/September/2016
+\project    
+\date       01/10/2024
 */
 /****************************************************************************************************/
 
