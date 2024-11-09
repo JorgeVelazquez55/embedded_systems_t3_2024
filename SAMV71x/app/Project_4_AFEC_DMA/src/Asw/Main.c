@@ -28,6 +28,8 @@
 /** Floating Point Unit */
 #include    "Fpu.h"
 
+#include    "timer.h"
+
 /*~~~~~~  Local definitions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 #define TIMER_MODE (TC_CMR_TCCLKS_TIMER_CLOCK1 | TC_CMR_CPCTRG)
@@ -49,12 +51,6 @@ Tc *p_TCCh0;
 uint32_t div_tc0;
 uint32_t tcclks_tc0;
 
-/*~~~~~~  Local functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-void TC0_Handler(void)
-{
-  //Do nothing?
-  printf( "-- TC0 Handler --\n\r" ) ;  
-};
 
 /*----------------------------------------------------------------------------
  *        Exported functions
@@ -112,19 +108,10 @@ extern int main( void )
       /* Initialize DAC */
     dac_initialization();
     dac_dmaTransfer();
-/*
-  PMC_EnablePeripheral(ID_TC0);
-
-  TC_Configure(p_TCCh0,0,TIMER_MODE);
-  TC_FindMckDivisor( 100, BOARD_MCK, &div_tc0, &tcclks_tc0, BOARD_MCK );
-  TC_Interrupt_Enable(p_TCCh0,0);
-
-  NVIC_ClearPendingIRQ(TC0_IRQn); //BASE_IRQ is UART0_IRQn
-	NVIC_SetPriority(TC0_IRQn, 1);
-  NVIC_EnableIRQ(TC0_IRQn);
-
-  TC_Start(p_TCCh0,0);
-	*/
+  
+  
+  	printf( "Configure TC.\n\r" );
+	_ConfigureTc() ;
 
   /* Scheduler Inititalization */
 	printf( "-- Scheduler Initialization --\n\r" ) ;

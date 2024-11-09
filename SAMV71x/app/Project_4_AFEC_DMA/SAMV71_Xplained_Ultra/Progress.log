@@ -1,10 +1,10 @@
-CONVERTING	C:\SAMV71x\app\Project_4_DMA\SAMV71_Xplained_Ultra\Debug\FoatingPoint.elf
-LOADING	C:\SAMV71x\app\Project_4_DMA\SAMV71_Xplained_Ultra\Debug\FoatingPoint.elf
+CONVERTING	C:\SAMV7x\SAMV71x\app\Project_4_AFEC_DMA\SAMV71_Xplained_Ultra\Debug\FoatingPoint.elf
+LOADING	C:\SAMV7x\SAMV71x\app\Project_4_AFEC_DMA\SAMV71_Xplained_Ultra\Debug\FoatingPoint.elf
 ANALYZING
 ANALYZING
 EMULATION	POD: Cortex (JTAG,SWD)   CPU: Cortex-M7
 DEBUG	PROTOCOL: SWD; RESET: SoC
-LOADING 	53912 bytes
+LOADING 	53776 bytes
 UMI INFO	Loading UMI monitor...
 PROGRAMMING	Atmel ATSAMV7 (2048 kB) (3 sectors)
 UMI INFO	Unloading UMI monitor...

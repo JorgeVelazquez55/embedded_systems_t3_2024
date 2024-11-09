@@ -9,8 +9,8 @@
    \date          20/10/2024 
 */
 
-#ifndef _TIMERC_H        /*prevent duplicated includes*/
-	#define _TIMERC_H
+#ifndef _TIMER_H        /*prevent duplicated includes*/
+	#define _TIMER_H
 
 
 extern void TC0_Handler(void);
