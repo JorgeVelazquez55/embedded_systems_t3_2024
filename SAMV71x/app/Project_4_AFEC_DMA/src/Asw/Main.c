@@ -27,13 +27,10 @@
 #include    "Button_Ctrl.h"
 /** Floating Point Unit */
 #include    "Fpu.h"
-/** Timer Counter */
-#include    "tc.h"
-#include    "timetick.h"
-#include    "timerC.h"
-
 
 /*~~~~~~  Local definitions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+#define TIMER_MODE (TC_CMR_TCCLKS_TIMER_CLOCK1 | TC_CMR_CPCTRG)
 
 /*~~~~~~  Global variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 float       spf_result;
@@ -48,12 +45,16 @@ int32_t     s32_result;
 int32_t     s32_int1;
 int32_t     s32_int2;
 
+Tc *p_TCCh0;
+uint32_t div_tc0;
+uint32_t tcclks_tc0;
+
 /*~~~~~~  Local functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/**
- *  Configure Timer Counter 0 to generate an interrupt every 250ms.
- */
-
-
+void TC0_Handler(void)
+{
+  //Do nothing?
+  printf( "-- TC0 Handler --\n\r" ) ;  
+};
 
 /*----------------------------------------------------------------------------
  *        Exported functions
@@ -67,8 +68,6 @@ extern int main( void )
 {
 	/* Disable watchdog */
 	Wdg_Disable();
-  SCB_EnableICache();
-	/* SCB_EnableDCache(); */
 	printf( "\n\r-- Scheduler Project %s --\n\r", SOFTPACK_VERSION ) ;
 	printf( "-- %s\n\r", BOARD_NAME ) ;
 	printf( "-- Compiled: %s %s With %s --\n\r", __DATE__, __TIME__ , COMPILER_NAME);
@@ -87,16 +86,16 @@ extern int main( void )
   spf_result1 = spf_int1 + spf_int2;
   spf_result2 = spf_result  * spf_result1;
   spf_result = spf_int1 * spf_int2;
-  spf_result = spf_int1 / spf_int2;   
+  spf_result = spf_int1 / spf_int2;
   /* Float to int conversion operations */
   u32_int1 = spf_int1;
-	u32_int2 = spf_int2;  
+	u32_int2 = spf_int2;
 		
 	s32_int1 = spf_int1;
-	s32_int2 = spf_int2;  
+	s32_int2 = spf_int2;
   /* Int to Float conversion operations */
   spf_result = u32_result;
-  spf_result = s32_result; 
+  spf_result = s32_result;
 	/* Integer operations */
 	u32_result = u32_int1 - u32_int2;
 	u32_result = u32_int1 + u32_int2;
@@ -107,25 +106,30 @@ extern int main( void )
 	s32_result = s32_int1 * s32_int2;
 	s32_result = s32_int1 / s32_int2;  
   /************************************************************************************/
-
-	/* Configure systick for 1 ms. */
-	TimeTick_Configure ();
-
-	printf( "Configure TC.\n\r" );
-	_ConfigureTc() ;
-
   
+  
+
       /* Initialize DAC */
-  printf( "-- Dac --\n\r" ) ;
     dac_initialization();
-  printf( "-- DMA --\n\r" ) ;
     dac_dmaTransfer();
-	
+/*
+  PMC_EnablePeripheral(ID_TC0);
+
+  TC_Configure(p_TCCh0,0,TIMER_MODE);
+  TC_FindMckDivisor( 100, BOARD_MCK, &div_tc0, &tcclks_tc0, BOARD_MCK );
+  TC_Interrupt_Enable(p_TCCh0,0);
+
+  NVIC_ClearPendingIRQ(TC0_IRQn); //BASE_IRQ is UART0_IRQn
+	NVIC_SetPriority(TC0_IRQn, 1);
+  NVIC_EnableIRQ(TC0_IRQn);
+
+  TC_Start(p_TCCh0,0);
+	*/
+
   /* Scheduler Inititalization */
 	printf( "-- Scheduler Initialization --\n\r" ) ;
 	SchM_Init(ScheduleConfig);
-
-
+	
 	/* Should never reach this code */
 	for(;;)
     {

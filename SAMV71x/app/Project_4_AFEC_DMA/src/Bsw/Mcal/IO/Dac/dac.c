@@ -2,10 +2,10 @@
 /**
 \file       dac.c
 \brief      MCAL abstraction level - Digital to Analog Converter Controller configuration and interrupt handling.
-\author     Jorge V, Gustavo S, Roberto V
+\author     Abraham Tezmol
 \version    1.0
-\project    
-\date       01/10/2024
+\project    Tau 
+\date       26/September/2016
 */
 /****************************************************************************************************/
 
@@ -73,7 +73,7 @@ void dac_initialization(void)
 	Mode = 0 --> Disabling Trigger mode --> Free-running or Max speed mode on the status of DACC_MR.MAXSx
 	Mode = 1 --> Trigger mode enabled 
 	 */
-	/* DACC_CfgTrigger(DACC, 0); */
+	DACC_CfgTrigger(DACC, 1);
 }
 
 /**
@@ -91,3 +91,4 @@ void dac_dmaTransfer(void)
 	Dac_ConfigureDma(&Dacd, DACC, ID_DACC, &dmad);
 	Dac_SendData(&Dacd, &DacCommand);
 }
+/* This must be the function triggered by the timer */

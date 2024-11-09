@@ -132,7 +132,7 @@ static uint8_t _Dac_configureLinkList(Dacc *pDacHw, void *pXdmad, DacCmd *pComma
 		dmaWriteLinkList[i].mbr_ubc = XDMA_UBC_NVIEW_NDV1 
 									| XDMA_UBC_NDE_FETCH_EN
 									| XDMA_UBC_NSEN_UPDATED
-									| XDMAC_CUBC_UBLEN(4);
+									| XDMAC_CUBC_UBLEN(8);
 		dmaWriteLinkList[i].mbr_sa = (uint32_t)pBuffer;
 		dmaWriteLinkList[i].mbr_da = 
 			(uint32_t)&(pDacHw->DACC_CDR[pCommand->dacChannel]);
@@ -225,7 +225,7 @@ uint32_t Dac_SendData( DacDma *pDacd, DacCmd *pCommand)
 	if (_Dac_configureLinkList(pDacHw, pDacd->pXdmad, pCommand))
 		return DAC_ERROR_LOCK;
 
-	SCB_CleanDCache();
+	//SCB_CleanDCache();
 
 	/* Start DMA TX */
 	if (XDMAD_StartTransfer( pDacd->pXdmad, dacDmaTxChannel )) 

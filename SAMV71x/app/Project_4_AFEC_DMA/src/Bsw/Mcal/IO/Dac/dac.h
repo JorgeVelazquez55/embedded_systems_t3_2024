@@ -36,6 +36,9 @@
 /** DAC Initialization function */
 void dac_initialization(void);
 
+/** DAC Transfer function */
+void dac_dmaTransfer(void);
+
 /****************************************************************************************************/
 
 #endif /* __DAC_H */
