@@ -132,7 +132,7 @@ static uint8_t _Dac_configureLinkList(Dacc *pDacHw, void *pXdmad, DacCmd *pComma
 		dmaWriteLinkList[i].mbr_ubc = XDMA_UBC_NVIEW_NDV1 
 									| XDMA_UBC_NDE_FETCH_EN
 									| XDMA_UBC_NSEN_UPDATED
-									| XDMAC_CUBC_UBLEN(8);
+									| XDMAC_CUBC_UBLEN(1024);
 		dmaWriteLinkList[i].mbr_sa = (uint32_t)pBuffer;
 		dmaWriteLinkList[i].mbr_da = 
 			(uint32_t)&(pDacHw->DACC_CDR[pCommand->dacChannel]);

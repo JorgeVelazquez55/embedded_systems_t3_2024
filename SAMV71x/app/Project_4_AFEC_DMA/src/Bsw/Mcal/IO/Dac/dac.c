@@ -21,7 +21,7 @@
 * Definition of module wide MACROs / #DEFINE-CONSTANTs 
 *****************************************************************************************************/
 /** SAMPLES per cycle*/
-#define SAMPLES         1024
+#define SAMPLES         2
 #define TEST_CHANNEL    5
 
 /*****************************************************************************************************
@@ -60,6 +60,11 @@ void dac_initialization(void)
 	PMC_EnablePeripheral(ID_DACC);
 	/* Command a Soft-reset onto Digital to Analog Converter Controller */
 	DACC_SoftReset(DACC);
+   /* Clear DACC_MR.MAXSx to enable Free running mode for both channels DAC0 and DAC1 */
+  DACC_CfgModeReg(DACC, DACC_MR_MAXS0_TRIG_EVENT | DACC_MR_MAXS1_TRIG_EVENT ) ;
+    /* Enable Invidivual channels */
+    DACC_CfgTrigger(DACC, DACC_TRIGR_TRGEN0_EN | DACC_TRIGR_TRGEN1_EN | DACC_TRIGR_TRGSEL0_TRGSEL1 | DACC_TRIGR_TRGSEL1_TRGSEL1);
+ 
 	/* Enable Invidivual channels */
 	DACC_EnableChannel(DACC, 0);
 	DACC_EnableChannel(DACC, 1);
@@ -73,7 +78,7 @@ void dac_initialization(void)
 	Mode = 0 --> Disabling Trigger mode --> Free-running or Max speed mode on the status of DACC_MR.MAXSx
 	Mode = 1 --> Trigger mode enabled 
 	 */
-	DACC_CfgTrigger(DACC, 1);
+	//DACC_CfgTrigger(DACC, 1);
 }
 
 /**

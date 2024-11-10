@@ -59,10 +59,10 @@ void _ConfigureTc(void)
 	/** Enable peripheral clock. */
 	PMC_EnablePeripheral(ID_TC0);
 	/** Configure TC for a 4Hz frequency and trigger on RC compare. */
-	TC_FindMckDivisor( 2000, BOARD_MCK, &div, &tcclks, BOARD_MCK );
+	TC_FindMckDivisor( 1920, BOARD_MCK, &div, &tcclks, BOARD_MCK );
   //TC_Configure(TC0, 0, tcclks |  TC_CMR_WAVSEL_UP_RC | TC_CMR_WAVE | TC_CMR_ACPC_TOGGLE | TC_CMR_ENETRG);
   TC0->TC_CHANNEL[0].TC_CMR = tcclks |  TC_CMR_WAVSEL_UP_RC | TC_CMR_WAVE | TC_CMR_ACPC_TOGGLE | TC_CMR_ENETRG;
-  TC0->TC_CHANNEL[0].TC_RC = (BOARD_MCK / div) / 2000;
+  TC0->TC_CHANNEL[0].TC_RC = (BOARD_MCK / div) / 1920;
   TC0->TC_CHANNEL[0].TC_CCR = TC_CCR_CLKEN | TC_CCR_SWTRG;
 
 	/* Configure and enable interrupt on RC compare */
