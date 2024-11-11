@@ -81,7 +81,7 @@
 
 /*  DMA driver instance */
 static uint32_t dacDmaTxChannel;
-static LinkedListDescriporView1 dmaWriteLinkList[1024]; // Size of DAC data buffer (Original 256)
+static LinkedListDescriporView1 dmaWriteLinkList[2]; // Size of DAC data buffer (Original 256)
 /*----------------------------------------------------------------------------
  *        Local functions
  *----------------------------------------------------------------------------*/
