@@ -52,7 +52,7 @@ STACK_SIZE = DEFINED(STACK_SIZE) ? STACK_SIZE : 0x2000;
 /* The heapsize used by the application. NOTE: you need to adjust according to your application. */
 HEAP_SIZE = DEFINED(HEAP_SIZE) ? HEAP_SIZE : 0x1000;
 /* Additional heap_memsize configuration (Actual heap space to be used in the project) */
-HEAP_MEM_SIZE = DEFINED(HEAP_MEM_SIZE) ? HEAP_MEM_SIZE : 0x1000;
+HEAP_MEMSIZE = DEFINED(HEAP_MEMSIZE) ? HEAP_MEMSIZE : 0x1000;
 
 INCLUDE ..\..\..\toolset\gcc\sam_flash.ld
 INCLUDE ..\..\..\toolset\gcc\sam_sdram.ld

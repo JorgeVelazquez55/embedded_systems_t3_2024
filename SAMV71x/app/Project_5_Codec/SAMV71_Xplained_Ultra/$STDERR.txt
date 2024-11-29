@@ -1,0 +1,8 @@
+C:\SAMV71xREPO\embedded_systems_t3_2024\SAMV71x\app\Project_5_Codec\SAMV71_Xplained_Ultra\Debug\board_lowlevel.o: In function `TCM_StackInit':
+C:\SAMV71xREPO\embedded_systems_t3_2024\SAMV71x\bsp\libboard_samv7-ek\source/board_lowlevel.c:331: undefined reference to `_edtcm_stack'
+C:\SAMV71xREPO\embedded_systems_t3_2024\SAMV71x\app\Project_5_Codec\SAMV71_Xplained_Ultra\Debug\board_lowlevel.o: In function `LowLevelInit':
+C:\SAMV71xREPO\embedded_systems_t3_2024\SAMV71x\bsp\libboard_samv7-ek\source/board_lowlevel.c:362: undefined reference to `_sitcm'
+C:\SAMV71xREPO\embedded_systems_t3_2024\SAMV71x\bsp\libboard_samv7-ek\source/board_lowlevel.c:362: undefined reference to `_itcm_lma'
+C:\SAMV71xREPO\embedded_systems_t3_2024\SAMV71x\bsp\libboard_samv7-ek\source/board_lowlevel.c:362: undefined reference to `_eitcm'
+collect2.exe: error: ld returned 1 exit status
+

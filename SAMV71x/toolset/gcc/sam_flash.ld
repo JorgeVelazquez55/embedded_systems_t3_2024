@@ -90,18 +90,8 @@ SECTIONS
     . = ALIGN(4);
     _etext = .;
 
-    /* HEAP MEMORY AREA */
-    .custom_heap (NOLOAD) : AT (_etext)
-    {
-		  . = ALIGN(4);
-		  _heap_mem_start = .;
-		  . = . + _heap_mem_size;
-		  . = ALIGN(4);	
-		  _heap_mem_end = .;
-          _heap_mem_size = _heap_mem_end - _heap_mem_start;
-    } > heap_memalloc
     .relocate : AT (_etext)
-    {	 
+    {
         . = ALIGN(4);
         _srelocate = .;
         *(.ramfunc .ramfunc.*);
@@ -133,6 +123,24 @@ SECTIONS
         _estack = .;
     } > ram
 
+	/*----------------------------------------------------------------------------
+ 	*        Start Memory map exercise 
+ 	*----------------------------------------------------------------------------*/ 
+
+    /* heap memalloc section */
+    .heap_memalloc (NOLOAD):
+    {
+        . = ALIGN(4);
+         _heap_mem_start = .;
+        . = . + HEAP_MEMSIZE;
+        . = ALIGN(4);
+        _heap_mem_end = .;
+    } > heap_memalloc
+
+	/*----------------------------------------------------------------------------
+ 	*        End Memory map exercise 
+ 	*----------------------------------------------------------------------------*/ 
+    
     /* heap section */
     .heap (NOLOAD):
     {
