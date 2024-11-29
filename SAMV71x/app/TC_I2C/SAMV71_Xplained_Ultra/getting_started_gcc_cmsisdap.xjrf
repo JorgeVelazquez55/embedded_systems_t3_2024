@@ -49,66 +49,67 @@
       </History>
       <PI.0>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <L>338</L>
-       <P>..\..\..\toolset\gcc\startup_sam.c</P>
-       <VL>332</VL>
+       <L>103</L>
+       <P>..\..\..\hal\libchip_samv7\source\wdt.c</P>
+       <VL>81</VL>
       </PI.0>
       <PI.1>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <P>..\..\..\toolset\gcc\sam_flash.ld</P>
-       <VL>15</VL>
+       <L>280</L>
+       <P>..\..\..\hal\libchip_samv7\source\pio.c</P>
+       <VL>271</VL>
       </PI.1>
       <PI.10>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <P>..\..\..\hal\libchip_samv7\include\samv7\system_samv71.h</P>
+       <P>..\..\..\bsp\libboard_samv7-ek\include\board_lowlevel.h</P>
+       <VL>7</VL>
       </PI.10>
       <PI.11>
+       <Bookmarks_num_>0</Bookmarks_num_>
+       <C>27</C>
+       <L>43</L>
+       <P>..\..\..\toolset\gcc\samv71q21_flash.ld</P>
+       <VL>20</VL>
+      </PI.11>
+      <PI.12>
+       <Bookmarks_num_>0</Bookmarks_num_>
+       <P>..\..\..\hal\libchip_samv7\include\samv7\system_samv71.h</P>
+      </PI.12>
+      <PI.13>
        <Bookmarks_num_>0</Bookmarks_num_>
        <L>2150</L>
        <P>..\..\..\hal\libchip_samv7\include\cmsis\CMSIS\Include\core_cm7.h</P>
        <VL>2143</VL>
-      </PI.11>
-      <PI.12>
+      </PI.13>
+      <PI.14>
        <Bookmarks_num_>0</Bookmarks_num_>
        <L>157</L>
        <P>..\..\..\hal\libchip_samv7\source\exceptions.c</P>
        <VL>144</VL>
-      </PI.12>
-      <PI.13>
+      </PI.14>
+      <PI.15>
        <Bookmarks_num_>0</Bookmarks_num_>
        <C>94</C>
        <L>74</L>
        <P>..\..\..\hal\libchip_samv7\include\cmsis\CMSIS\Include\core_cmFunc.h</P>
        <VL>550</VL>
-      </PI.13>
-      <PI.14>
+      </PI.15>
+      <PI.16>
        <Bookmarks_num_>0</Bookmarks_num_>
        <P>..\..\..\hal\libchip_samv7\chip.h</P>
        <VL>11</VL>
-      </PI.14>
-      <PI.15>
+      </PI.16>
+      <PI.17>
        <Bookmarks_num_>0</Bookmarks_num_>
        <L>399</L>
        <P>..\src\main_full.c</P>
        <VL>224</VL>
-      </PI.15>
-      <PI.16>
+      </PI.17>
+      <PI.18>
        <Bookmarks_num_>0</Bookmarks_num_>
        <L>229</L>
        <P>..\src\main_blinky.c</P>
        <VL>92</VL>
-      </PI.16>
-      <PI.17>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <L>103</L>
-       <P>..\..\..\hal\libchip_samv7\source\wdt.c</P>
-       <VL>81</VL>
-      </PI.17>
-      <PI.18>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <L>331</L>
-       <P>..\..\..\hal\libchip_samv7\source\pio.c</P>
-       <VL>310</VL>
       </PI.18>
       <PI.19>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -118,9 +119,10 @@
       </PI.19>
       <PI.2>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <L>130</L>
-       <P>..\..\..\hal\libchip_samv7\source\timetick.c</P>
-       <VL>130</VL>
+       <C>30</C>
+       <L>334</L>
+       <P>..\..\..\toolset\gcc\startup_sam.c</P>
+       <VL>315</VL>
       </PI.2>
       <PI.20>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -185,9 +187,8 @@
       </PI.29>
       <PI.3>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <L>118</L>
-       <P>..\..\..\bsp\libboard_samv7-ek\source\syscalls.c</P>
-       <VL>107</VL>
+       <P>..\..\..\toolset\gcc\sam_flash.ld</P>
+       <VL>15</VL>
       </PI.3>
       <PI.30>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -254,9 +255,9 @@
       </PI.39>
       <PI.4>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <L>211</L>
-       <P>..\..\..\bsp\libboard_samv7-ek\source\dbg_console.c</P>
-       <VL>180</VL>
+       <L>130</L>
+       <P>..\..\..\hal\libchip_samv7\source\timetick.c</P>
+       <VL>130</VL>
       </PI.4>
       <PI.40>
        <Bookmarks_num_>0</Bookmarks_num_>
@@ -320,34 +321,35 @@
       </PI.49>
       <PI.5>
        <Bookmarks_num_>0</Bookmarks_num_>
-       <C>47</C>
-       <L>138</L>
-       <P>..\src\main.c</P>
-       <VL>168</VL>
+       <L>118</L>
+       <P>..\..\..\bsp\libboard_samv7-ek\source\syscalls.c</P>
+       <VL>107</VL>
       </PI.5>
       <PI.6>
+       <Bookmarks_num_>0</Bookmarks_num_>
+       <C>41</C>
+       <L>204</L>
+       <P>..\..\..\bsp\libboard_samv7-ek\source\dbg_console.c</P>
+       <VL>213</VL>
+      </PI.6>
+      <PI.7>
+       <Bookmarks_num_>0</Bookmarks_num_>
+       <C>74</C>
+       <L>239</L>
+       <P>..\src\main.c</P>
+       <VL>228</VL>
+      </PI.7>
+      <PI.8>
        <Bookmarks_num_>0</Bookmarks_num_>
        <C>47</C>
        <L>53</L>
        <P>..\readme.txt</P>
-      </PI.6>
-      <PI.7>
+      </PI.8>
+      <PI.9>
        <Bookmarks_num_>0</Bookmarks_num_>
        <L>132</L>
        <P>..\..\..\bsp\libboard_samv7-ek\board.h</P>
        <VL>724</VL>
-      </PI.7>
-      <PI.8>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <P>..\..\..\bsp\libboard_samv7-ek\include\board_lowlevel.h</P>
-       <VL>7</VL>
-      </PI.8>
-      <PI.9>
-       <Bookmarks_num_>0</Bookmarks_num_>
-       <C>27</C>
-       <L>43</L>
-       <P>..\..\..\toolset\gcc\samv71q21_flash.ld</P>
-       <VL>20</VL>
       </PI.9>
      </REG_ROOT>
     </EditorOptions>
@@ -822,7 +824,7 @@
        <RelativeFileName>..\src\main.c</RelativeFileName>
       </ActiveDocument>
       <Editor.0>
-       <FileBarIndex>1</FileBarIndex>
+       <FileBarIndex>3</FileBarIndex>
        <RectPosBottom>612</RectPosBottom>
        <RectPosLeft>182</RectPosLeft>
        <RectPosRight>804</RectPosRight>
@@ -830,7 +832,7 @@
        <RelativeFileName>..\readme.txt</RelativeFileName>
       </Editor.0>
       <Editor.1>
-       <FileBarIndex>3</FileBarIndex>
+       <FileBarIndex>5</FileBarIndex>
        <RectPosBottom>668</RectPosBottom>
        <RectPosLeft>208</RectPosLeft>
        <RectPosRight>828</RectPosRight>
@@ -838,7 +840,7 @@
        <RelativeFileName>..\src\main.c</RelativeFileName>
       </Editor.1>
       <Editor.2>
-       <FileBarIndex>0</FileBarIndex>
+       <FileBarIndex>2</FileBarIndex>
        <RectPosBottom>638</RectPosBottom>
        <RectPosLeft>208</RectPosLeft>
        <RectPosRight>830</RectPosRight>
@@ -846,7 +848,7 @@
        <RelativeFileName>..\..\..\bsp\libboard_samv7-ek\source\dbg_console.c</RelativeFileName>
       </Editor.2>
       <Editor.3>
-       <FileBarIndex>4</FileBarIndex>
+       <FileBarIndex>6</FileBarIndex>
        <RectPosBottom>460</RectPosBottom>
        <RectPosLeft>0</RectPosLeft>
        <RectPosRight>620</RectPosRight>
@@ -854,29 +856,45 @@
        <RelativeFileName>..\..\..\bsp\libboard_samv7-ek\source\syscalls.c</RelativeFileName>
       </Editor.3>
       <Editor.4>
-       <FileBarIndex>2</FileBarIndex>
+       <FileBarIndex>1</FileBarIndex>
+       <RectPosBottom>430</RectPosBottom>
+       <RectPosLeft>0</RectPosLeft>
+       <RectPosRight>638</RectPosRight>
+       <RectPosTop>0</RectPosTop>
+       <RelativeFileName>..\..\..\hal\libchip_samv7\source\pio.c</RelativeFileName>
+      </Editor.4>
+      <Editor.5>
+       <FileBarIndex>4</FileBarIndex>
        <RectPosBottom>564</RectPosBottom>
        <RectPosLeft>104</RectPosLeft>
        <RectPosRight>726</RectPosRight>
        <RectPosTop>104</RectPosTop>
        <RelativeFileName>..\..\..\hal\libchip_samv7\source\timetick.c</RelativeFileName>
-      </Editor.4>
-      <Editor.5>
-       <FileBarIndex>5</FileBarIndex>
+      </Editor.5>
+      <Editor.6>
+       <FileBarIndex>0</FileBarIndex>
+       <RectPosBottom>462</RectPosBottom>
+       <RectPosLeft>32</RectPosLeft>
+       <RectPosRight>783</RectPosRight>
+       <RectPosTop>32</RectPosTop>
+       <RelativeFileName>..\..\..\hal\libchip_samv7\source\wdt.c</RelativeFileName>
+      </Editor.6>
+      <Editor.7>
+       <FileBarIndex>7</FileBarIndex>
        <RectPosBottom>616</RectPosBottom>
        <RectPosLeft>156</RectPosLeft>
        <RectPosRight>776</RectPosRight>
        <RectPosTop>156</RectPosTop>
        <RelativeFileName>..\..\..\toolset\gcc\sam_flash.ld</RelativeFileName>
-      </Editor.5>
-      <Editor.6>
-       <FileBarIndex>6</FileBarIndex>
+      </Editor.7>
+      <Editor.8>
+       <FileBarIndex>8</FileBarIndex>
        <RectPosBottom>642</RectPosBottom>
        <RectPosLeft>182</RectPosLeft>
        <RectPosRight>802</RectPosRight>
        <RectPosTop>182</RectPosTop>
        <RelativeFileName>..\..\..\toolset\gcc\startup_sam.c</RelativeFileName>
-      </Editor.6>
+      </Editor.8>
       <EditorHistoryFile.0>
        <RelativeFileName>..\..\..\hal\libchip_samv7\include\samv7\system_samv71.h</RelativeFileName>
       </EditorHistoryFile.0>
@@ -891,10 +909,10 @@
       </EditorHistoryFile.3>
      </Documents.0>
      <Progress>
-      <b>542</b>
-      <l>431</l>
-      <r>935</r>
-      <t>178</t>
+      <b>780</b>
+      <l>708</l>
+      <r>1376</r>
+      <t>333</t>
      </Progress>
      <Watches>
       <ActiveWatchPane>2</ActiveWatchPane>
@@ -1086,7 +1104,7 @@
        </DockRect.5>
        <DockRect.6>
         <AreHorz>1</AreHorz>
-        <Percent>834</Percent>
+        <Percent>947</Percent>
         <Type>1</Type>
         <TypeOfWnd>-2</TypeOfWnd>
        </DockRect.6>
@@ -1098,7 +1116,7 @@
        </DockRect.7>
        <DockRect.8>
         <AreHorz>1</AreHorz>
-        <Percent>741</Percent>
+        <Percent>628</Percent>
         <Type>0</Type>
         <TypeOfWnd>-1</TypeOfWnd>
         <DockRect.0>
@@ -1184,7 +1202,7 @@
        <TypeOfWnd>-1</TypeOfWnd>
        <DockRect.0>
         <AreHorz>1</AreHorz>
-        <Percent>1177</Percent>
+        <Percent>914</Percent>
         <strTypeOfWnd>Output</strTypeOfWnd>
         <Type>0</Type>
         <TypeOfWnd>0</TypeOfWnd>
@@ -1197,7 +1215,7 @@
        </DockRect.1>
        <DockRect.2>
         <AreHorz>1</AreHorz>
-        <Percent>640</Percent>
+        <Percent>333</Percent>
         <strTypeOfWnd>SFR</strTypeOfWnd>
         <Type>0</Type>
         <TypeOfWnd>12</TypeOfWnd>
@@ -1219,10 +1237,23 @@
        </DockRect.2>
        <DockRect.3>
         <AreHorz>1</AreHorz>
-        <Percent>0</Percent>
+        <Percent>5</Percent>
         <Type>6</Type>
         <TypeOfWnd>-1</TypeOfWnd>
        </DockRect.3>
+       <DockRect.4>
+        <AreHorz>1</AreHorz>
+        <Percent>663</Percent>
+        <strTypeOfWnd>Terminal</strTypeOfWnd>
+        <Type>0</Type>
+        <TypeOfWnd>20</TypeOfWnd>
+       </DockRect.4>
+       <DockRect.5>
+        <AreHorz>1</AreHorz>
+        <Percent>0</Percent>
+        <Type>6</Type>
+        <TypeOfWnd>-1</TypeOfWnd>
+       </DockRect.5>
       </DockRect.2>
       <DockRect.3>
        <AreHorz>1</AreHorz>
@@ -1237,6 +1268,32 @@
       <Fetch>
        <Beep>True</Beep>
        <DisplayMessage>True</DisplayMessage>
+       <BP.0>
+        <__>
+         <ActionEnabled>False</ActionEnabled>
+         <ActionScript></ActionScript>
+         <ActionScriptParams></ActionScriptParams>
+         <ActionShow>False</ActionShow>
+         <Active>True</Active>
+         <Condition></Condition>
+         <Condition_Count>0</Condition_Count>
+         <ConditionEnabled>False</ConditionEnabled>
+         <Name>&quot;..\src\main.c&quot;::243</Name>
+        </__>
+       </BP.0>
+       <BP.1>
+        <__>
+         <ActionEnabled>False</ActionEnabled>
+         <ActionScript></ActionScript>
+         <ActionScriptParams></ActionScriptParams>
+         <ActionShow>False</ActionShow>
+         <Active>True</Active>
+         <Condition></Condition>
+         <Condition_Count>0</Condition_Count>
+         <ConditionEnabled>False</ConditionEnabled>
+         <Name>&quot;..\src\main.c&quot;::220</Name>
+        </__>
+       </BP.1>
       </Fetch>
      </Breakpoints>
      <CASETool>
@@ -1804,7 +1861,7 @@
         <AppendNewline>0</AppendNewline>
         <AppendNewlineOut>0</AppendNewlineOut>
         <BaudRate>115200</BaudRate>
-        <CommChannel>COM8</CommChannel>
+        <CommChannel>COM3</CommChannel>
         <DataBits>8</DataBits>
         <DTR_DSR>0</DTR_DSR>
         <LocalEcho>0</LocalEcho>
@@ -2073,18 +2130,6 @@
             </Items.5>
            </__>
           </Items.1>
-          <Items.10>
-           <__>
-            <Name>PWM0</Name>
-            <Options>0</Options>
-           </__>
-          </Items.10>
-          <Items.11>
-           <__>
-            <Name>USART0</Name>
-            <Options>0</Options>
-           </__>
-          </Items.11>
           <Items.2>
            <__>
             <Name>HSMCI</Name>
@@ -2097,42 +2142,6 @@
             <Options>0</Options>
            </__>
           </Items.3>
-          <Items.4>
-           <__>
-            <Name>SPI0</Name>
-            <Options>0</Options>
-           </__>
-          </Items.4>
-          <Items.5>
-           <__>
-            <Name>TC0</Name>
-            <Options>0</Options>
-           </__>
-          </Items.5>
-          <Items.6>
-           <__>
-            <Name>TC1</Name>
-            <Options>0</Options>
-           </__>
-          </Items.6>
-          <Items.7>
-           <__>
-            <Name>TC2</Name>
-            <Options>0</Options>
-           </__>
-          </Items.7>
-          <Items.8>
-           <__>
-            <Name>TWIHS0</Name>
-            <Options>0</Options>
-           </__>
-          </Items.8>
-          <Items.9>
-           <__>
-            <Name>TWIHS1</Name>
-            <Options>0</Options>
-           </__>
-          </Items.9>
          </__>
         </Items.0>
        </GlobalState>

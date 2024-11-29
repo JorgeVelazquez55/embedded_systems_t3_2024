@@ -225,20 +225,20 @@ extern int main( void )
 	printf( "-- Compiled: %s %s With %s--\n\r", __DATE__, __TIME__ , COMPILER_NAME);
 
 	/* Enable I and D cache */
-	SCB_EnableICache();
+	//SCB_EnableICache();
 //	SCB_EnableDCache();
 
 	/* Configure systick for 1 ms. */
-	TimeTick_Configure ();
+	//TimeTick_Configure ();
 	PIO_Configure(pPins, PIO_LISTSIZE(pPins));
 
 
 
 	printf( "Configure LED PIOs.\n\r" ) ;
-	_ConfigureLeds() ;
+	//_ConfigureLeds() ;
 
 	printf( "Configure TC.\n\r" );
-	_ConfigureTc() ;
+	//_ConfigureTc() ;
 
 	i2c_configure();
 	TWI_StartWrite(TWIHS0, 0x03, 0x02, 1,0x20);
