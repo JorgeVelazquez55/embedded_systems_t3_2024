@@ -23,11 +23,18 @@
 #include    "Button_Ctrl.h"
 /** Floating Point Unit */
 #include    "Fpu.h"
+#include    "i2c.h"
+
 
 /*~~~~~~  Local definitions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
   #define SAMP_PER  (50)
   #define BUFF_SIZE (2048)
+
+/** I2C SDA y SCL Pin Definitions */
+const Pin pPins[] = { PIN_TWI_TWD0, PIN_TWI_TWCK0, PIN_PCK2 , PIN_SSC_TD, PIN_SSC_TK, PIN_SSC_TF, PIN_SSC_RD, PIN_SSC_RK, PIN_SSC_RF};
+
+
 
 /*~~~~~~  Global variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
@@ -67,6 +74,8 @@ extern int main( void )
 	SCB_EnableDCache(); 
   /* Enable Floating Point Unit */
   Fpu_Enable();
+  /* Congiguracion de pines */
+  PIO_Configure(pPins, PIO_LISTSIZE(pPins));
     
 	printf( "\n\r-- Scheduler Project %s --\n\r", SOFTPACK_VERSION ) ;
 	printf( "-- %s\n\r", BOARD_NAME ) ;
@@ -75,6 +84,10 @@ extern int main( void )
   /* Scheduler Inititalization */
   printf( "-- Scheduler Initialization --\n\r" ) ;
 	SchM_Init(ScheduleConfig);
+
+  
+  /* I2c configuration function */  
+  i2c_configure();
 	
 	/* Should never reach this code */
 	for(;;)
