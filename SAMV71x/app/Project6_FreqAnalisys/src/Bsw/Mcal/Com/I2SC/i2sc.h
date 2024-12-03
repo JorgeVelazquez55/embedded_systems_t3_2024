@@ -24,4 +24,4 @@
 /* Prototypes */
 void SSC_Init_Configuration(void);
 
-#endif /* _I2C_H */
+#endif /* _I2SC_H */

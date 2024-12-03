@@ -20,11 +20,11 @@
 /*----------------------------------------------------------------------------
  *        FUNCTIONS
  *----------------------------------------------------------------------------*//*    TWI instancia    */
-static Twid twid;
 
 
 /** TWI High Speed clock */
 #define I2C_CLOCK		  400000
+Twid twid;
 
 void i2c_configure(void)
 {
@@ -38,7 +38,6 @@ void i2c_configure(void)
 	NVIC_EnableIRQ(TWIHS0_IRQn);
 	
 }
-
 
 
 /*    Interrupcion de TWI    */

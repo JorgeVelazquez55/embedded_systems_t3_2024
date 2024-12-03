@@ -6,11 +6,13 @@ static sXdmadCfg xdmadCfg;
 static uint32_t i2sDmaTxChannel;
 
 extern uint16_t codecOutputData[SAMPLES];
-static LinkedListDescriporView1 dmaWriteLinkList[BUFFERS];
+
 
 static uint32_t nextData[BUFFERS] = { 0 };
 static uint8_t flag = 1;
 static bool cpuBusy = false;
+
+COMPILER_ALIGNED(32) static LinkedListDescriporView1 dmaWriteLinkList[BUFFERS];
 
 /*----------------------------------------------------------------------------
  *        Local functions
@@ -46,13 +48,13 @@ static void callBack(uint32_t Channel, void* pArg)
  * \returns 0 if the dma channel configuration successfully; otherwise returns
  * DAC_ERROR_XXX.
  */
-uint8_t i2sConfigureDma()
+void i2sConfigureDma(void)
 {
     sXdmad* pi2sd = &dmad;
 	/* Driver initialize */
 	XDMAD_Initialize( pi2sd, 0 );
 
-	XDMAD_FreeChannel( pi2sd, i2sDmaTxChannel);
+	//XDMAD_FreeChannel( pi2sd, i2sDmaTxChannel);
     	/* Configure TWI interrupts */
 	NVIC_ClearPendingIRQ(XDMAC_IRQn);
 	NVIC_EnableIRQ(XDMAC_IRQn);
@@ -61,23 +63,12 @@ uint8_t i2sConfigureDma()
 	i2sDmaTxChannel = XDMAD_AllocateChannel( pi2sd, ID_SSC, XDMAD_TRANSFER_MEMORY);
 	if ( i2sDmaTxChannel == XDMAD_ALLOC_FAILED ) {
 		printf("xDMA channel allocation error\n\r");
-        return DAC_ERROR;
+       // return DAC_ERROR;
 	}
-    XDMAD_PrepareChannel( pi2sd, i2sDmaTxChannel );
-/* 	if ( i2sDmaTxChannel == (XDMAD_DONE ||  XDMAD_BUSY || XDMAD_ERROR || XDMAD_CANCELED ))
-    {
-        printf("xDMA prepare channel error\n\r");
-		return DAC_ERROR;
-    }  */
     XDMAD_SetCallback(pi2sd, i2sDmaTxChannel, callBack, 0);
+    XDMAD_PrepareChannel( pi2sd, i2sDmaTxChannel );
 
-/*     if ( i2sDmaTxChannel == (XDMAD_DONE ||  XDMAD_BUSY || XDMAD_ERROR || XDMAD_CANCELED ))
-    {
-        printf("xDMA callback error\n\r");
-        return DAC_ERROR;
-        while(1);
-    } */
-	return DAC_OK;
+	//return DAC_OK;
 }
 
 /**
@@ -87,11 +78,11 @@ uint8_t i2sConfigureDma()
  * \param size length of buffer
  */
 
-uint8_t i2sconfigureLinkList()
+void i2sconfigureLinkList(void)
 {
 	uint32_t xdmaCndc;
 	uint32_t i;		
-    uint16_t* src = &codecOutputData[0];
+  uint16_t* src = &codecOutputData[0];
 	for(i = 0; i < BUFFERS; i++){
 		dmaWriteLinkList[i].mbr_ubc = XDMA_UBC_NVIEW_NDV1 
 									| XDMA_UBC_NDE_FETCH_EN
@@ -109,21 +100,21 @@ uint8_t i2sconfigureLinkList()
 		}
 		src += UBLEN_SIZE;
 	}
-	xdmadCfg.mbr_cfg = XDMAC_CC_TYPE_PER_TRAN 
-					 | XDMAC_CC_MBSIZE_SINGLE 
-					 | XDMAC_CC_DSYNC_MEM2PER 
-					 | XDMAC_CC_CSIZE_CHK_1 
-					 | XDMAC_CC_DWIDTH_WORD
-					 | XDMAC_CC_SIF_AHB_IF0 
-					 | XDMAC_CC_DIF_AHB_IF1 
-					 | XDMAC_CC_SAM_INCREMENTED_AM 
-					 | XDMAC_CC_DAM_FIXED_AM 
-					 | XDMAC_CC_PERID(
-						XDMAIF_Get_ChannelNumber(ID_SSC, XDMAD_TRANSFER_TX ));
-	xdmaCndc = XDMAC_CNDC_NDVIEW_NDV1 
-			 | XDMAC_CNDC_NDE_DSCR_FETCH_EN 
-			 | XDMAC_CNDC_NDSUP_SRC_PARAMS_UPDATED
-			 | XDMAC_CNDC_NDDUP_DST_PARAMS_UPDATED ;
+  
+	xdmadCfg.mbr_cfg = XDMAC_CC_TYPE_PER_TRAN
+		| XDMAC_CC_MBSIZE_SINGLE
+		| XDMAC_CC_DSYNC_PER2MEM
+		| XDMAC_CC_CSIZE_CHK_1
+		| XDMAC_CC_DWIDTH_HALFWORD
+		| XDMAC_CC_SIF_AHB_IF1
+		| XDMAC_CC_DIF_AHB_IF1
+		| XDMAC_CC_SAM_FIXED_AM
+		| XDMAC_CC_DAM_INCREMENTED_AM
+		| XDMAC_CC_PERID(XDMAIF_Get_ChannelNumber(ID_SSC, XDMAD_TRANSFER_RX));
+	xdmaCndc = XDMAC_CNDC_NDVIEW_NDV1
+		| XDMAC_CNDC_NDE_DSCR_FETCH_EN
+		| XDMAC_CNDC_NDSUP_SRC_PARAMS_UPDATED
+		| XDMAC_CNDC_NDDUP_DST_PARAMS_UPDATED;
 
     SCB_CleanInvalidateDCache();
 
@@ -137,5 +128,5 @@ uint8_t i2sconfigureLinkList()
 
 	XDMAD_StopTransfer(&dmad, i2sDmaTxChannel);
   	SCB_CleanInvalidateDCache();
-	return DAC_OK;
+	//return DAC_OK;
 }

@@ -17,7 +17,7 @@
 #define UBLEN_SIZE	0x1000
 
 void XDMAC_Handler(void);
-uint8_t i2sConfigureDma();
-uint8_t i2sconfigureLinkList();
+void i2sConfigureDma(void);
+void i2sconfigureLinkList(void);
 
 #endif
