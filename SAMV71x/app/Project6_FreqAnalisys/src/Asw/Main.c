@@ -24,12 +24,14 @@
 /** Floating Point Unit */
 #include    "Fpu.h"
 #include    "i2c.h"
+#include    "i2sc.h"
 
 
 /*~~~~~~  Local definitions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
   #define SAMP_PER  (50)
   #define BUFF_SIZE (2048)
+
 
 /** I2C SDA y SCL Pin Definitions */
 const Pin pPins[] = { PIN_TWI_TWD0, PIN_TWI_TWCK0, PIN_PCK2 , PIN_SSC_TD, PIN_SSC_TK, PIN_SSC_TF, PIN_SSC_RD, PIN_SSC_RK, PIN_SSC_RF};
@@ -46,6 +48,8 @@ float       fft_signalPower[BUFF_SIZE/2];
 uint32_t    u32fft_maxPowerIndex;
 /** Auxiliary output variable that holds the maximum level of signal power */
 float       fft_maxPower;
+/** Output data from codec, input to the FFT **/
+uint16_t codecOutputData[SAMPLES];
 
 /*~~~~~~  Local functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
@@ -85,7 +89,8 @@ extern int main( void )
   printf( "-- Scheduler Initialization --\n\r" ) ;
 	SchM_Init(ScheduleConfig);
 
-  
+  /* Scheduler Inititalization */
+  printf( "-- I2C configuration --\n\r" ) ;
   /* I2c configuration function */  
   i2c_configure();
 	

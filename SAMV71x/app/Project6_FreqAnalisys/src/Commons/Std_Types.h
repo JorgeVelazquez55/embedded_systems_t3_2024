@@ -47,6 +47,8 @@
   #define STD_ON      0x01
   #define STD_OFF     0x00
 
+  #define SAMPLES 2048
+
   #ifndef NULL
 		#define    NULL    ( ( void * ) 0 )
   #endif
