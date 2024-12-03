@@ -16,6 +16,7 @@
 #define BUFFERS 	2
 #define UBLEN_SIZE	0x1000
 
-void DMA_Configure(void);
+uint8_t i2sConfigureDma();
+uint8_t i2sconfigureLinkList();
 
 #endif
