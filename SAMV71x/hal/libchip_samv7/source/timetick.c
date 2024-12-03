@@ -83,7 +83,7 @@ SyTickDelayCounter_t DelayTimer;
 
 void SetTimeEvent(TimeEvent* pEvent)
 {
-    pTimeEventList = pEvent;
+    //pTimeEventList = pEvent;
 }
 
 /**
@@ -93,32 +93,8 @@ void SetTimeEvent(TimeEvent* pEvent)
  *  \note IRQ handler must be configured before invoking this function.
  */
 uint32_t TimeTick_Configure( void )
-{
-	uint8_t Mdiv_Val;
-	uint32_t Pck;
-	_dwTickCount = 0 ;
-
-	TRACE_INFO( "Configure system tick to get 1ms tick period.\n\r" ) ;
-	/* check if there is MDIV value */
-	Mdiv_Val = ( (PMC->PMC_MCKR & PMC_MCKR_MDIV_Msk) >> PMC_MCKR_MDIV_Pos);
-
-	if(Mdiv_Val == 0) {
-	  Pck = BOARD_MCK;
-	} else if(Mdiv_Val == 3 ) {
-	  Pck = BOARD_MCK * Mdiv_Val;
-	} else {
-	  Pck = BOARD_MCK * (Mdiv_Val*2);
-	}
-
-	 DelayTimer.pTimer1 = NULL; DelayTimer.pTimer1=NULL;
-	/* Configure SysTick for 1 ms. */
-	if ( SysTick_Config( Pck/1000 ) ) {
-		TRACE_ERROR("SysTick configuration error\n\r" ) ;
-		SysTickConfigured = 0;
-		return 1;
-	}
-	SysTickConfigured = 1;
-	return 0;
+{ 
+	
 }
 
 /**
@@ -128,10 +104,10 @@ uint32_t TimeTick_Configure( void )
  */
 uint32_t GetDelayInTicks(uint32_t startTick, uint32_t endTick)
 {
-	assert(SysTickConfigured);
+	//assert(SysTickConfigured);
 	
-	if (endTick >= startTick) return (endTick - startTick);
-	return (endTick + (0xFFFFFFFF - startTick) + 1);
+	//if (endTick >= startTick) return (endTick - startTick);
+	//return (endTick + (0xFFFFFFFF - startTick) + 1);
 	
 }
 
@@ -142,9 +118,9 @@ uint32_t GetDelayInTicks(uint32_t startTick, uint32_t endTick)
  */
 uint32_t GetTicks(void)
 {
-	assert(SysTickConfigured);
+	//assert(SysTickConfigured);
 	
-	return _dwTickCount;
+	//return _dwTickCount;
 }
 
 /**
@@ -153,14 +129,10 @@ uint32_t GetTicks(void)
  */
 void Wait( volatile uint32_t dwMs )
 {
-	uint32_t dwStart , dwEnd;
-	
-	assert(SysTickConfigured);
-	
-	dwStart = _dwTickCount ;
-	dwEnd = _dwTickCount;
-	while(GetDelayInTicks(dwStart, dwEnd) < dwMs ){
-		dwEnd = _dwTickCount;
+uint64_t wait = dwMs * 37600;
+
+	while(wait > 0){
+		wait--;
 	}
 }
 
@@ -170,18 +142,5 @@ void Wait( volatile uint32_t dwMs )
  */
 void Sleep( volatile uint32_t dwMs )
 {
-	uint32_t dwStart , dwEnd;
-	 
-	assert(SysTickConfigured);
-   
-	__ASM("CPSIE   I");
-	dwStart = _dwTickCount ;
-	dwEnd = _dwTickCount;
-	do {
-		if (GetDelayInTicks(dwStart, dwEnd) < dwMs ) {
-			break ;
-		}
-		dwEnd = _dwTickCount;
-		__ASM("WFI");
-	} while( 1 ) ;
+
 }
