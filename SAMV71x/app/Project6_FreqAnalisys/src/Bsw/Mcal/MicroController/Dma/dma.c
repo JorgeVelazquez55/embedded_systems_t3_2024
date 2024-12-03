@@ -8,6 +8,10 @@ static uint32_t i2sDmaTxChannel;
 extern uint16_t codecOutputData[SAMPLES];
 static LinkedListDescriporView1 dmaWriteLinkList[BUFFERS];
 
+static uint32_t nextData[BUFFERS] = { 0 };
+static uint8_t flag = 1;
+static bool cpuBusy = false;
+
 /*----------------------------------------------------------------------------
  *        Local functions
  *----------------------------------------------------------------------------*/
@@ -15,8 +19,26 @@ void XDMAC_Handler(void)
 {
 	XDMAD_Handler(&dmad);
 }
-static void callBack(uint32_t Channel)
+
+static void callBack(uint32_t Channel, void* pArg)
 {
+	Channel = Channel;
+	pArg = pArg;
+
+	if (cpuBusy) {
+		if (nextData[flag] == 0)
+			nextData[flag] = (dmad.pXdmacs->XDMAC_CHID[i2sDmaTxChannel].XDMAC_CNDA);
+		else {
+			TRACE_WARNING("DMA is faster than CPU-%d\n\r",flag);
+			nextData[flag] = (dmad.pXdmacs->XDMAC_CHID[i2sDmaTxChannel].XDMAC_CNDA);
+		}
+	}
+	flag++;
+	if (flag == BUFFERS) {
+		flag = 0;
+		/*CPU starts to handle nextData, the first data are abandoned*/
+		cpuBusy = true;
+	}
 }
 /**
  * \brief Configure the DMA Channels: 0 RX.

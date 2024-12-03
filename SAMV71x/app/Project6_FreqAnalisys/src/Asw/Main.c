@@ -25,6 +25,7 @@
 #include    "Fpu.h"
 #include    "i2c.h"
 #include    "i2sc.h"
+#include    "dma.h"
 
 
 /*~~~~~~  Local definitions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -81,7 +82,10 @@ extern int main( void )
   /* Congiguracion de pines */
   PIO_Configure(pPins, PIO_LISTSIZE(pPins));
     
-	printf( "\n\r-- Scheduler Project %s --\n\r", SOFTPACK_VERSION ) ;
+  /* Configuración y habilitación del SSC */
+  SSC_Init_Configuration();
+	
+  printf( "\n\r-- Scheduler Project %s --\n\r", SOFTPACK_VERSION ) ;
 	printf( "-- %s\n\r", BOARD_NAME ) ;
 	printf( "-- Compiled: %s %s With %s --\n\r", __DATE__, __TIME__ , COMPILER_NAME);
 
@@ -89,11 +93,22 @@ extern int main( void )
   printf( "-- Scheduler Initialization --\n\r" ) ;
 	SchM_Init(ScheduleConfig);
 
+  /* DMA */
+  i2sConfigureDma();
+
+  /*Codec config*/
+
   /* Scheduler Inititalization */
   printf( "-- I2C configuration --\n\r" ) ;
   /* I2c configuration function */  
   i2c_configure();
 	
+  /* Start of moving data*/
+  i2sconfigureLinkList();
+
+ for(i=0;i<SAMPLES;i++){
+  	fft_inputData[i] = (float)codecOutputData[i];
+  }
 	/* Should never reach this code */
 	for(;;)
     {
