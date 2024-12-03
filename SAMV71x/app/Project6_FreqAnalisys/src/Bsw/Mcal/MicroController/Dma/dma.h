@@ -4,8 +4,18 @@
 #include "Std_Types.h"
 #include "xdmad.h"
 
-/* Definitions */
+/*------------------------------------------------------------------------------
+ *         Definitions
+ *------------------------------------------------------------------------------*/
+#define DAC_OK          0
+#define DAC_ERROR       1
+#define DAC_ERROR_LOCK  2
+
+#define DACC_CHANNEL_0 0
+#define DACC_CHANNEL_1 1
 #define BUFFERS 	2
 #define UBLEN_SIZE	0x1000
+
+void DMA_Configure(void);
 
 #endif
