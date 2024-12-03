@@ -40,19 +40,46 @@ SEARCH_DIR(.)
 /* Memory Spaces Definitions */
 MEMORY
 {
-  rom (rx)            : ORIGIN = 0x00400000, LENGTH = 0x00200000
-  heap_memalloc(rwx)  : ORIGIN = 0x20400000, LENGTH = 0x00010000
-  ram (rwx)           : ORIGIN = 0x20410000, LENGTH = 0x00060000
-  sdram(rwx)          : ORIGIN = 0x70000000, LENGTH = 0x00200000
+  itcm (rwx)	     : ORIGIN = 0x00000000, LENGTH = 0x00008000	  /* ITCM 	   --> 32 KByte   */
+  rom (rx)           : ORIGIN = 0x00400000, LENGTH = 0x00200000	  /* Flash 	   --> 2048 KByte */
+  dtcm (rw) 	     : ORIGIN = 0x20000000, LENGTH = 0x00008000	  /* DTCM 	   --> 32 KByte   */
+  ram (rwx)          : ORIGIN = 0x20400000, LENGTH = 0x00040000	  /* RAM 	   --> 256 KByte  */
+  heap_memalloc(rwx) : ORIGIN = 0x20440000, LENGTH = 0x00010000	  /* Heap_memalloc --> 64 KByte   */
+  sdram(rwx)         : ORIGIN = 0x70000000, LENGTH = 0x00200000	  /* SDRAM 	   --> 2048 KByte */
 }
 
 /* The stack size used by the application. NOTE: you need to adjust according to your application. */
-STACK_SIZE = DEFINED(STACK_SIZE) ? STACK_SIZE : 0x2000;
+STACK_SIZE = DEFINED(STACK_SIZE) ? STACK_SIZE : 0x4000;
 
 /* The heapsize used by the application. NOTE: you need to adjust according to your application. */
 HEAP_SIZE = DEFINED(HEAP_SIZE) ? HEAP_SIZE : 0x1000;
-/* Additional heap_memsize configuration (Actual heap space to be used in the project) */
-HEAP_MEM_SIZE = DEFINED(HEAP_MEM_SIZE) ? HEAP_MEM_SIZE : 0x1000;
+
+heap_memsize = DEFINED(heap_memsize) ? heap_memsize : 0x1000;
+
+SECTIONS                                                                
+{                                                                       
+    .code_TCM 0x00000000:                                               
+    AT ( _itcm_lma )                                                    
+    {                                                                   
+        _sitcm = .;                                                     
+        KEEP(*(.itcm_code .itcm_code.*))  
+        _eitcm = .;                                                     
+    } > itcm                                                            
+                                                                        
+    .data_TCM 0x20000000:                                               
+    {                                                                   
+        _sdtcm = .;                                                     
+        _edtcm = .;                                                     
+    } > dtcm                                                            
+                                                                        
+    .DTCM_stack :                                                       
+    {                                                                   
+        . = ALIGN(8);                                                   
+        _sdtcm_stack = .;                                               
+        . += STACK_SIZE;                                                
+        _edtcm_stack = .;                                               
+    } > dtcm                                                            
+}
 
 INCLUDE ..\..\..\toolset\gcc\sam_flash.ld
 INCLUDE ..\..\..\toolset\gcc\sam_sdram.ld

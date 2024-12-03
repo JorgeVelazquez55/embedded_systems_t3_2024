@@ -88,20 +88,17 @@ SECTIONS
     PROVIDE_HIDDEN (__exidx_end = .);
 
     . = ALIGN(4);
+    _itcm_lma = .;                                  
+    .relocate_to_itcm :                         
+    {                                           
+        . = ALIGN(8);                           
+        . = . + 0x8000;   /* 32K Bytes --> SIZEOF(.code_TCM); */
+        . = ALIGN(8);                           
+    } > rom                                     
     _etext = .;
 
-    /* HEAP MEMORY AREA */
-    .custom_heap (NOLOAD) : AT (_etext)
-    {
-		  . = ALIGN(4);
-		  _heap_mem_start = .;
-		  . = . + _heap_mem_size;
-		  . = ALIGN(4);	
-		  _heap_mem_end = .;
-          _heap_mem_size = _heap_mem_end - _heap_mem_start;
-    } > heap_memalloc
     .relocate : AT (_etext)
-    {	 
+    {
         . = ALIGN(4);
         _srelocate = .;
         *(.ramfunc .ramfunc.*);
@@ -142,6 +139,15 @@ SECTIONS
         . = ALIGN(8);
         _eheap = .;
     } > ram
+    
+    .my_heap (NOLOAD):
+	  {
+		  . = ALIGN(4);
+      _heap_mem_start = .;
+		  . = . + heap_memsize;
+      . = ALIGN(4);
+		  _heap_mem_end = .;
+	  } > heap_memalloc
 
     . = ALIGN(4);
     _end = . ;

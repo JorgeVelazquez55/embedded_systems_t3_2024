@@ -40,8 +40,12 @@ extern uint32_t _szero;
 extern uint32_t _ezero;
 extern uint32_t _sstack;
 extern uint32_t _estack;
-extern uint32_t _heap_mem_start;
-extern uint32_t _heap_mem_end;
+extern uint32_t _edtcm_stack;
+extern uint8_t _heap_mem_start;
+extern uint8_t _heap_mem_end;
+extern uint8_t _itcm_lma;
+extern uint8_t _sitcm;
+extern uint8_t _eitcm;
 
 /** \cond DOXYGEN_SHOULD_SKIP_THIS */
 int main(void);
@@ -294,8 +298,11 @@ const DeviceVectors exception_table = {
 		.pfnRSWDT_Handler   = (void*) RSWDT_Handler    /* 63 Watchdog Timer 1 */
 };
 
+/** Address for ARM CPACR */
+#define ADDR_CPACR 0xE000ED88
+/** CPACR Register */
+#define REG_CPACR  (*((volatile uint32_t *)ADDR_CPACR))
 
-#ifdef ENABLE_TCM 
 /** \brief  TCM memory enable
 
 	The function enables TCM memories
@@ -312,7 +319,6 @@ __STATIC_INLINE void TCM_Enable(void)
 	__DSB();
 	__ISB();
 }
-#endif
 
 /** \brief  TCM memory Disable
 
@@ -335,7 +341,9 @@ __STATIC_INLINE void TCM_Disable(void)
  */
 void Reset_Handler(void)
 {
-		uint32_t *pSrc, *pDest;
+	    uint32_t *pSrc, *pDest;
+        uint8_t *u8dst;
+	    uint8_t *u8src;
 
 		/* Initialize the relocate segment */
 		pSrc = &_etext;
@@ -352,36 +360,40 @@ void Reset_Handler(void)
 				*pDest++ = 0;
 		}
 
+        /* Clear my heap segment */
+		for (u8dst = &_heap_mem_start; u8dst < &_heap_mem_end;) {
+				*u8dst++ = 0;
+		}
+
 		/* Set the vector table base address */
 		pSrc = (uint32_t *) & _sfixed;
 		SCB->VTOR = ((uint32_t) pSrc & SCB_VTOR_TBLOFF_Msk);
 
-	#ifdef ENABLE_TCM 
-	#ifndef FFT_DEMO
-	// 32 Kb
-		EFC->EEFC_FCR = (EEFC_FCR_FKEY_PASSWD | EEFC_FCR_FCMD_CGPB 
-						| EEFC_FCR_FARG(8));
-	#else
-	// 128 Kb
-		EFC->EEFC_FCR = (EEFC_FCR_FKEY_PASSWD | EEFC_FCR_FCMD_SGPB 
-						| EEFC_FCR_FARG(8));
-	#endif
-		EFC->EEFC_FCR = (EEFC_FCR_FKEY_PASSWD | EEFC_FCR_FCMD_SGPB
-						| EEFC_FCR_FARG(7));
- 
-		TCM_Enable();
-	#else
-		EFC->EEFC_FCR = (EEFC_FCR_FKEY_PASSWD | EEFC_FCR_FCMD_CGPB 
-						| EEFC_FCR_FARG(8));
-		EFC->EEFC_FCR = (EEFC_FCR_FKEY_PASSWD | EEFC_FCR_FCMD_CGPB 
-						| EEFC_FCR_FARG(7));
-	
-		TCM_Disable();
-	#endif
+        /*Configure TCM sizes to: 128 kB ITCM - 128 kB DTCM (set GPNVM7 and GPNVM8)*/
+        /* By enabling Bit 7 --> We enable 32 Kb of ITCM and 32KB of DTCM */
+        EFC->EEFC_FCR = (EEFC_FCR_FKEY_PASSWD | EEFC_FCR_FCMD_SGPB | EEFC_FCR_FARG(7));
+        /* Enable Tight Coupled Memory */
+        TCM_Enable();
+    
+    
+        /* Set the Main STACK Pointer to DTCM stack section */
+        __DSB();
+        __ISB();
+        __set_MSP( (uint32_t)(&_edtcm_stack) ) ;
+        __DSB();
+        __ISB();
+
+        u8dst = &_sitcm;
+	    u8src = &_itcm_lma;
+    
+        /* copy code_TCM from flash to ITCM */
+        while(u8dst < &_eitcm){
+		  *u8dst++ = *u8src++;
+        }    
 
 		LowLevelInit();
 		/* Initialize the C library */
-//		__libc_init_array();
+        /*      __libc_init_array();    */
 
 		/* Branch to main function */
 		main();
