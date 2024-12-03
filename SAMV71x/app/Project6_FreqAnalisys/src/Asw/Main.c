@@ -37,7 +37,7 @@
 /** I2C SDA y SCL Pin Definitions */
 const Pin pPins[] = { PIN_TWI_TWD0, PIN_TWI_TWCK0, PIN_PCK2 , PIN_SSC_TD, PIN_SSC_TK, PIN_SSC_TF, PIN_SSC_RD, PIN_SSC_RK, PIN_SSC_RF};
 
-
+static Twid twid;
 
 /*~~~~~~  Global variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
@@ -83,7 +83,7 @@ extern int main( void )
   /* Congiguracion de pines */
   PIO_Configure(pPins, PIO_LISTSIZE(pPins));
     
-  /* Configuración y habilitación del SSC */
+  /* Configuracion y habilitacion del SSC */
   SSC_Init_Configuration();
 	
   printf( "\n\r-- Scheduler Project %s --\n\r", SOFTPACK_VERSION ) ;
@@ -103,7 +103,23 @@ extern int main( void )
   printf( "-- I2C configuration --\n\r" ) ;
   /* I2c configuration function */  
   i2c_configure();
-	
+
+	/* Configuraci�n del WM8904, sin inversor de reloj */
+  
+  WM8904_Write(&twid, WM8904_SLAVE_ADDRESS, 22, 0);
+  
+  if(WM8904_Read(&twid, WM8904_SLAVE_ADDRESS, 0) != 0x8904){
+    
+    printf("Communication with WM8904 failed\n");
+    
+    while(1);
+ 
+  }
+  
+  WM8904_Init(&twid, WM8904_SLAVE_ADDRESS, PMC_MCKR_CSS_SLOW_CLK);
+  
+                                                                                                                                                                                                                                               PMC_ConfigurePCK2(PMC_MCKR_CSS_SLOW_CLK, PMC_MCKR_PRES_CLK_1);
+  
   /* Start of moving data*/
   i2sconfigureLinkList();
 
@@ -111,16 +127,13 @@ extern int main( void )
   	fft_inputData[i] = (float)codecOutputData[i];
   }
 	/* Should never reach this code */
-	for(;;)
-    {
-		printf( "-- Unexpected Error at Scheduler Initialization --\n\r" ) ;
-	}
+	while(1);
 }
 
 void fft_process(void)
 {
   /** Perform FFT on the input signal */
-  fft(fft_inputData, fft_signalPower, BUFF_SIZE/2, &u32fft_maxPowerIndex, &fft_maxPower);
+  fft(fft_inputData, fft_signalPower, SAMPLES/2, &u32fft_maxPowerIndex, &fft_maxPower);
         
   /* Publish through emulated Serial */
   printf("%5d  %5.4f \r\n", u32fft_maxPowerIndex, fft_maxPower);

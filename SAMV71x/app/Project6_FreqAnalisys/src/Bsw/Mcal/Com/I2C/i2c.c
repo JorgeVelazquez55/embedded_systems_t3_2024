@@ -43,7 +43,7 @@ void i2c_configure(void)
 
 /*    Interrupcion de TWI    */
 void TWIHS0_Handler(void){
-	//TWID_Handler(&twid);
+	TWID_Handler(&twid);
 }
 
 /*----------------------------------------------------------------------------
