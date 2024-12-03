@@ -3,10 +3,10 @@
   \mainpage
   \n 
   \brief        Main application (main module)
-  \author       Abraham Tezmol Otero, M.S.E.E
-  \project      Tau 
-  \version      1.0
-  \date         12/Jun/2016
+  \author     Jorge V, Gustavo S, Roberto V
+  \version    1.0
+  \project    
+  \date       01/12/2024
    
 
 /*~~~~~~  Headers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

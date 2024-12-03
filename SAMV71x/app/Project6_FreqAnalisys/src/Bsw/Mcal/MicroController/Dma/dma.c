@@ -1,3 +1,13 @@
+/**
+\file       i2c.c
+\brief      MCAL abstraction level - dma configuration
+\author     Jorge V, Gustavo S, Roberto V
+\version    1.0
+\project    
+\date       01/12/2024
+*/
+/****************************************************************************************************/
+
 #include "dma.h"
 
 static sXdmad dmad;
