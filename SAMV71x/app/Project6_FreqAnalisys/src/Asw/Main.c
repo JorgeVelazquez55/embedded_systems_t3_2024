@@ -68,6 +68,7 @@ pfun pFFT = &fft_process;
  */
 extern int main( void )
 {
+  uint32_t i;
 	/* Disable watchdog */
 	Wdg_Disable();
 	/* Configure LEDs */
